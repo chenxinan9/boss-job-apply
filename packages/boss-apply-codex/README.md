@@ -1,0 +1,34 @@
+# Codex 版 BOSS 自动投递
+
+这是可独立使用的技能与执行手册。本人填写简历与条件，Codex 读取并操作本人登录的真实 BOSS。浏览器接入见 [接入说明](references/codex.md)，完整行为见 [执行手册](执行手册.md)。
+
+下载指令与两端一句话安装提示见 [仓库首页](https://github.com/chenxinan9/boss-job-apply#一句话交给软件)。
+
+## 最短开始方法
+
+1. 解压本包，按接入说明加载 SKILL.md。创建本地 private/，复制模板为 private/policy.json 与 private/resume.md，换成自己的资料。模板不含职业、城市、薪资或评分预设；客户端根据本人需求草拟后，须由本人确认。
+2. 让客户端读取下列指令，完成准备：
+
+```text
+请读取本工作区 SKILL.md、执行手册和本客户端接入说明。我的条件在 private/policy.json，简历在 private/resume.md。先用 review，在真实 BOSS 本人登录会话里核对推荐入口、卡片切换和当前 JD，给出少量只读匹配说明，不发送。
+```
+
+3. 准备正确后，由本人发出实际授权：
+
+```text
+现在授权按我已确认的 private/policy.json 和 private/resume.md 开始真实 BOSS 首次沟通，确认 requirements_confirmed=true 后将 mode 改为 apply。使用当前同一任务；逐岗判断，单次立即沟通后下一岗，直到平台提示本日额度已满或遇到执行手册规定的停止条件。不要投后核验、逐岗记账或重复发送。遇到登录、验证、风控交给我处理。
+```
+
+4. 需要每日运行时，按接入说明设置客户端定时，再启用私有配置 schedule.enabled。只改 JSON 不会生成定时任务。
+
+## 配置与依赖
+
+必要：本客户端、可用浏览器操作能力、本人的 BOSS 登录与授权。无需额外数据库、后台服务、外部 AI API Key 或作者账号。Ego 等浏览器接入能力由使用者当前客户端提供，不包含在本包。Python 3 是可选配置检查工具：`python3 scripts/check_policy.py private/policy.json`。Codex 的可选 Node.js 防护模块不属于 WorkBuddy 依赖。
+
+没有默认职业方向、招聘来源偏好、评分权重、通过门槛或特殊评分规则。读取 matching，根据自己的资料填写配置；空白配置不能投递。
+
+只更新简历文件即可换简历。附件简历与平台招呼语由本人在 BOSS 维护，本包不会自动上传或修改。首次沟通不代表自动发送 PDF 附件。
+
+查看 [验证状态](docs/validation.md)。WorkBuddy 实站已能发送，但连续满额尚未确认；Codex 原环境有满额记录；两种通用包和 Windows 尚未全新环境实机验收。
+
+MIT 开源。个人文件、浏览器会话、聊天与运行日志不提交公共仓库。

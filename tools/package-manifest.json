@@ -1,0 +1,34 @@
+{
+  "boss-apply-codex": [
+    "SKILL.md",
+    "README.md",
+    "执行手册.md",
+    "LICENSE",
+    ".gitignore",
+    "templates/policy.example.json",
+    "templates/resume.example.md",
+    "templates/schedule-prompt.md",
+    "scripts/check_policy.py",
+    "references/matching.md",
+    "docs/validation.md",
+    "references/codex.md",
+    "optional/native-guard/fresh-ui.mjs",
+    "optional/native-guard/control-signals.mjs",
+    "optional/native-guard/control-signals.json",
+    "optional/native-guard/README.md"
+  ],
+  "boss-apply-workbuddy": [
+    "SKILL.md",
+    "README.md",
+    "执行手册.md",
+    "LICENSE",
+    ".gitignore",
+    "templates/policy.example.json",
+    "templates/resume.example.md",
+    "templates/schedule-prompt.md",
+    "scripts/check_policy.py",
+    "references/matching.md",
+    "docs/validation.md",
+    "references/workbuddy.md"
+  ]
+}
