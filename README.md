@@ -23,25 +23,25 @@
 **macOS / Linux · Codex**
 
 ```sh
-curl --fail --location --proto '=https' --proto-redir '=https' https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.2.0/tools/download_release.py -o boss-skill-install.py && python3 boss-skill-install.py --client codex
+curl --fail --location --connect-timeout 10 --max-time 60 --proto '=https' --proto-redir '=https' https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.2.0/tools/download_release.py -o boss-skill-install.py && python3 boss-skill-install.py --client codex
 ```
 
 **macOS / Linux · WorkBuddy**
 
 ```sh
-curl --fail --location --proto '=https' --proto-redir '=https' https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.2.0/tools/download_release.py -o boss-skill-install.py && python3 boss-skill-install.py --client workbuddy
+curl --fail --location --connect-timeout 10 --max-time 60 --proto '=https' --proto-redir '=https' https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.2.0/tools/download_release.py -o boss-skill-install.py && python3 boss-skill-install.py --client workbuddy
 ```
 
 **Windows PowerShell · Codex**
 
 ```powershell
-& { $ErrorActionPreference='Stop'; Invoke-WebRequest 'https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.2.0/tools/download_release.py' -OutFile 'boss-skill-install.py'; py -3 boss-skill-install.py --client codex }
+& { $ErrorActionPreference='Stop'; Invoke-WebRequest 'https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.2.0/tools/download_release.py' -OutFile 'boss-skill-install.py' -TimeoutSec 60; py -3 boss-skill-install.py --client codex }
 ```
 
 **Windows PowerShell · WorkBuddy**
 
 ```powershell
-& { $ErrorActionPreference='Stop'; Invoke-WebRequest 'https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.2.0/tools/download_release.py' -OutFile 'boss-skill-install.py'; py -3 boss-skill-install.py --client workbuddy }
+& { $ErrorActionPreference='Stop'; Invoke-WebRequest 'https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.2.0/tools/download_release.py' -OutFile 'boss-skill-install.py' -TimeoutSec 60; py -3 boss-skill-install.py --client workbuddy }
 ```
 
 也可不装 Python，直接下载 [Codex ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.2.0/boss-apply-codex-0.2.0.zip) 或 [WorkBuddy ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.2.0/boss-apply-workbuddy-0.2.0.zip)，使用 [SHA256SUMS](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.2.0/SHA256SUMS) 核对后解压。完整[安装说明](docs/install.md)。
