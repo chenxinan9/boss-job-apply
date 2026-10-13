@@ -6,15 +6,16 @@ import json
 from pathlib import Path, PurePosixPath
 import shutil
 import stat
+import sys
 import tempfile
 import unicodedata
 import urllib.parse
 import urllib.request
 import zipfile
 
-VERSION='v0.2.0'
+VERSION='v0.2.1'
 REPOSITORY='https://github.com/chenxinan9/boss-job-apply'
-ARCHIVES={'codex': {'name': 'boss-apply-codex-0.2.0.zip', 'sha256': 'c245e59aa67ce65941b1783db4d041b365338698105f6be897969bf10f6ac9dd'}, 'workbuddy': {'name': 'boss-apply-workbuddy-0.2.0.zip', 'sha256': 'b27c7e026519246932faf0d6c7c0ec599bfe4a8c764cc28801f2c285c3954ad4'}}
+ARCHIVES={'codex': {'name': 'boss-apply-codex-0.2.1.zip', 'sha256': '52b1a92c0a77e538c7d1453fa9d6bbda8dae37eb011a8daa36334c7dd24d785f'}, 'workbuddy': {'name': 'boss-apply-workbuddy-0.2.1.zip', 'sha256': '09f80123c1c16e60a0c6f164e26691355cbf3c906cf159a668ab9e1652b6a614'}}
 MAX_DOWNLOAD=10*1024*1024
 MAX_UNPACKED=30*1024*1024
 
@@ -85,6 +86,10 @@ def install(client,destination):
     return receipt
 
 def main():
+    # PowerShell pipes may default to a legacy code page even when files are UTF-8.
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="backslashreplace")
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--client',required=True,choices=tuple(ARCHIVES))
     parser.add_argument('--destination',type=Path)

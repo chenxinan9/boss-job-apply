@@ -75,6 +75,6 @@ if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('policy',type=Path);args=parser.parse_args()
     try:
         p=json.loads(args.policy.read_text(encoding='utf-8-sig'));ready=validate(p)
-        print(json.dumps({'status':'READY' if ready else 'DRAFT','mode':p['mode'],'boundary':'配置状态不是本人外发授权，也不证明浏览器已连接'},ensure_ascii=False))
+        print(json.dumps({'status':'READY' if ready else 'DRAFT','mode':p['mode'],'boundary':'配置状态不是本人外发授权，也不证明浏览器已连接'},ensure_ascii=True))
     except (ValueError,KeyError,TypeError,OSError) as error:
-        print(json.dumps({'status':'FAIL','error':str(error)},ensure_ascii=False));raise SystemExit(1)
+        print(json.dumps({'status':'FAIL','error':str(error)},ensure_ascii=True));raise SystemExit(1)

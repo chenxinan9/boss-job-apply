@@ -1,5 +1,6 @@
 import importlib.util
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -71,6 +72,14 @@ class EnvironmentTest(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stderr)
             self.assertEqual(json.loads(result.stdout)['status'], 'ENVIRONMENT_ONLY')
             self.assertEqual(list(work.iterdir()), [])
+
+    def test_policy_cli_with_legacy_console_encoding(self):
+        env=dict(os.environ, PYTHONIOENCODING='cp1252')
+        base=SCRIPT.parents[1]
+        result=subprocess.run([sys.executable,str(base/'scripts/check_policy.py'),str(base/'templates/policy.example.json')],
+                              env=env,capture_output=True,timeout=10)
+        self.assertEqual(result.returncode,0,result.stderr)
+        self.assertEqual(json.loads(result.stdout)['status'],'DRAFT')
 
     def test_client_copies_identical(self):
         for name in ('scripts/doctor.py', 'references/setup.md'):

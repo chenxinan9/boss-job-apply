@@ -60,6 +60,12 @@ class DownloadTest(unittest.TestCase):
         with patch.object(m,'download',side_effect=download):
             with self.assertRaises(FileExistsError):m.install('codex',dest)
         self.assertEqual([p.name for p in dest.iterdir()],['keep'])
+    def test_success_message_with_legacy_console_encoding(self):
+        raw=io.BytesIO();console=io.TextIOWrapper(raw,encoding='cp1252')
+        with patch.object(m.sys,'stdout',console),patch.object(m.sys,'argv',['download_release.py','--client','codex']),patch.object(m,'install',return_value={'sha256':'0'*64}):
+            m.main()
+        console.flush()
+        self.assertIn('已校验并下载',raw.getvalue().decode('utf-8'))
     def test_real_packaged_files_checksum_and_extract(self):
         for client,item in m.ARCHIVES.items():
             p=Path(__file__).resolve().parents[1]/'dist'/item['name']
