@@ -68,9 +68,17 @@ class PolicyTest(unittest.TestCase):
                 self.assertIn('\n'+key+':',header)
     def test_editions_match(self):
         a=PACKAGES/'boss-apply-codex';b=PACKAGES/'boss-apply-workbuddy'
-        for name in ['templates/policy.example.json','templates/resume.example.md','templates/schedule-prompt.md','scripts/check_policy.py','references/matching.md','docs/validation.md']:
+        for name in ['templates/policy.example.json','templates/resume.example.md','templates/schedule-prompt.md','scripts/check_policy.py','references/matching.md','references/browser-session.md','docs/validation.md']:
             self.assertEqual((a/name).read_bytes(),(b/name).read_bytes(),name)
         self.assertEqual((a/'执行手册.md').read_text().split('## 读取与边界',1)[1],(b/'执行手册.md').read_text().split('## 读取与边界',1)[1])
+    def test_additional_requirements_validate_evidence(self):
+        p=self.ready();p['additional_requirements']=[{'name':'附加条件','condition':'满足本人条件','visible_evidence':'当前页面字段','unknown_action':'SKIP'}]
+        self.assertTrue(self.validate(p))
+        for field,value in [('visible_evidence',''),('unknown_action','ASSUME')]:
+            q=copy.deepcopy(p);q['additional_requirements'][0][field]=value
+            with self.assertRaises(ValueError):self.validate(q)
+    def test_missing_optional_extra_field_is_compatible(self):
+        p=self.ready();p.pop('additional_requirements',None);self.assertTrue(self.validate(p))
     def test_private_inputs_absent(self):
         for base in PACKAGES.iterdir():self.assertFalse((base/'private').exists())
 

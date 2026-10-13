@@ -12,9 +12,9 @@ import urllib.parse
 import urllib.request
 import zipfile
 
-VERSION='v0.1.1'
+VERSION='v0.1.2'
 REPOSITORY='https://github.com/chenxinan9/boss-job-apply'
-ARCHIVES={'codex': {'name': 'boss-apply-codex-0.1.1.zip', 'sha256': 'f49e40f7822f58f49d89c086e47d931ee53c65eceff011da0bd8014f63673dc0'}, 'workbuddy': {'name': 'boss-apply-workbuddy-0.1.1.zip', 'sha256': '7e3f64cb3dbd8b3ef788710c04d65b7547a73378cbf9b1a7816891707cdc4f0a'}}
+ARCHIVES={'codex': {'name': 'boss-apply-codex-0.1.2.zip', 'sha256': '06870bc3503a52d033c72105272b5820ee67bad23e66009c20782dedcb0b8d2b'}, 'workbuddy': {'name': 'boss-apply-workbuddy-0.1.2.zip', 'sha256': 'cf5e4d44e250e2fc94bf927f77677c67f5c0f2bf3c63d945f06203dac408a4fa'}}
 MAX_DOWNLOAD=10*1024*1024
 MAX_UNPACKED=30*1024*1024
 

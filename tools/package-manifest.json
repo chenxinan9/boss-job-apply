@@ -15,7 +15,8 @@
     "optional/native-guard/fresh-ui.mjs",
     "optional/native-guard/control-signals.mjs",
     "optional/native-guard/control-signals.json",
-    "optional/native-guard/README.md"
+    "optional/native-guard/README.md",
+    "references/browser-session.md"
   ],
   "boss-apply-workbuddy": [
     "SKILL.md",
@@ -29,6 +30,7 @@
     "scripts/check_policy.py",
     "references/matching.md",
     "docs/validation.md",
-    "references/workbuddy.md"
+    "references/workbuddy.md",
+    "references/browser-session.md"
   ]
 }

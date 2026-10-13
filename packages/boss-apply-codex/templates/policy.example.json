@@ -32,5 +32,6 @@
   "completion": "CURRENT_PLATFORM_DAILY_CAP",
   "historical_dedupe": false,
   "post_send_verification": false,
-  "per_job_records": false
+  "per_job_records": false,
+  "additional_requirements": []
 }

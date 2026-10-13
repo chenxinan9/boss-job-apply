@@ -31,6 +31,12 @@ def validate(p):
     if salary is not None and (type(salary) not in (int,float) or not 0<salary<10000): raise ValueError('薪资额外门槛须为正数或null')
     for key in ('allowed_recruiter_types','exclude_companies','exclude_titles','exclude_primary_duties','allowed_scope'):
         if not text_list(p[key]): raise ValueError(key+' 必须为文本列表')
+    extra=p.get('additional_requirements',[])
+    if not isinstance(extra,list): raise ValueError('additional_requirements 必须为列表')
+    for requirement in extra:
+        if not isinstance(requirement,dict) or any(not isinstance(requirement.get(k),str) or not requirement[k].strip() for k in ('name','condition','visible_evidence')):
+            raise ValueError('附加要求需要名称、条件和可见证据说明')
+        if requirement.get('unknown_action')!='SKIP': raise ValueError('附加条件不明时跳过，不猜测')
     if p.get('unknown_recruiter_action')!='SKIP': raise ValueError('来源不明时应跳过')
     scoring=p['scoring']; dims=scoring['dimensions']
     if not isinstance(dims,list): raise ValueError('评分维度必须为列表')

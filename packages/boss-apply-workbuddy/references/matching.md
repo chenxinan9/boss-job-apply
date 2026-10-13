@@ -25,3 +25,7 @@ AI 只根据当前 JD 和本人简历事实给每项 0 到 max_score 的整数�
 默认门槛使用 scoring.default.operator（> 或 >=）及 threshold。特殊条件可在 scoring.special_rules 中自行增加，每项包含 name、scope、operator、threshold；scope 必须说明如何根据当前 JD 判定，不能凭标题中的一个词推断。命中特殊规则时采用其门槛，多项同时命中则都须满足；没有命中则用默认门槛。公开模板 special_rules 为空。
 
 评分只在当前上下文用于判断，不建立逐岗文件、历史台账或旧评分引擎。
+
+## 其他本人硬条件
+
+额外要求使用 additional_requirements 列表，包含 name、condition、visible_evidence、unknown_action=SKIP。列表可为空；旧版配置没有此字段时视为空。页面档位不能精确表达条件时按 `browser-session.md` 处理，不擅自改门槛或推测数据。

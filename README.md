@@ -23,28 +23,28 @@
 **macOS / Linux · Codex**
 
 ```sh
-curl --fail --location --proto '=https' --proto-redir '=https' https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.1.1/tools/download_release.py -o boss-skill-install.py && python3 boss-skill-install.py --client codex
+curl --fail --location --proto '=https' --proto-redir '=https' https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.1.2/tools/download_release.py -o boss-skill-install.py && python3 boss-skill-install.py --client codex
 ```
 
 **macOS / Linux · WorkBuddy**
 
 ```sh
-curl --fail --location --proto '=https' --proto-redir '=https' https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.1.1/tools/download_release.py -o boss-skill-install.py && python3 boss-skill-install.py --client workbuddy
+curl --fail --location --proto '=https' --proto-redir '=https' https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.1.2/tools/download_release.py -o boss-skill-install.py && python3 boss-skill-install.py --client workbuddy
 ```
 
 **Windows PowerShell · Codex**
 
 ```powershell
-& { $ErrorActionPreference='Stop'; Invoke-WebRequest 'https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.1.1/tools/download_release.py' -OutFile 'boss-skill-install.py'; py -3 boss-skill-install.py --client codex }
+& { $ErrorActionPreference='Stop'; Invoke-WebRequest 'https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.1.2/tools/download_release.py' -OutFile 'boss-skill-install.py'; py -3 boss-skill-install.py --client codex }
 ```
 
 **Windows PowerShell · WorkBuddy**
 
 ```powershell
-& { $ErrorActionPreference='Stop'; Invoke-WebRequest 'https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.1.1/tools/download_release.py' -OutFile 'boss-skill-install.py'; py -3 boss-skill-install.py --client workbuddy }
+& { $ErrorActionPreference='Stop'; Invoke-WebRequest 'https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.1.2/tools/download_release.py' -OutFile 'boss-skill-install.py'; py -3 boss-skill-install.py --client workbuddy }
 ```
 
-也可不装 Python，直接下载 [Codex ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.1.1/boss-apply-codex-0.1.1.zip) 或 [WorkBuddy ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.1.1/boss-apply-workbuddy-0.1.1.zip)，使用 [SHA256SUMS](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.1.1/SHA256SUMS) 核对后解压。完整[安装说明](docs/install.md)。
+也可不装 Python，直接下载 [Codex ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.1.2/boss-apply-codex-0.1.2.zip) 或 [WorkBuddy ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.1.2/boss-apply-workbuddy-0.1.2.zip)，使用 [SHA256SUMS](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.1.2/SHA256SUMS) 核对后解压。完整[安装说明](docs/install.md)。
 
 ## 填自己的资料，再运行
 
@@ -54,6 +54,12 @@ curl --fail --location --proto '=https' --proto-redir '=https' https://raw.githu
 4. 本人确认并授权后，客户端才单次点击“立即沟通”。需要定时再按客户端界面配置；修改 JSON 不会自动创建任务。
 
 修改简历只改自己的 resume.md，条件与日程独立。同一 BOSS 账号只选一个客户端执行。该流程处理首次沟通，不自动上传附件或改招呼语。
+
+## 浏览器接入与故障恢复
+
+首次使用先确认本机实际可用的浏览器工具和登录页面，再核对推荐入口与当前筛选；不能先在无关列表里开发抓取程序。读取失败时按 [浏览器接入与有限恢复](packages/boss-apply-workbuddy/references/browser-session.md) 处理。任务运行中不生成另一个投递驱动，不靠修改 Cookie、接口补数或重复刷新继续。
+
+旧用户更新：下载到新目录，让原任务重新读取手册；私有条件保留并复核，不覆盖原工作区、不建立第二执行者。下载更新不会自动控制朋友的电脑。
 
 ## 通用流程
 
