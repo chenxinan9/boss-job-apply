@@ -48,5 +48,7 @@ try {
   if (configured) {
     try { await run([adapter, 'close']); } catch (error) { console.error('Test session cleanup failed: ' + error.message); }
   }
-  server.close();rmSync(cwd, { recursive: true, force: true });
+  server.close();
+  // Windows releases the daemon's working-directory handle shortly after close replies.
+  rmSync(cwd, { recursive: true, force: true, maxRetries: 10, retryDelay: 200 });
 }
