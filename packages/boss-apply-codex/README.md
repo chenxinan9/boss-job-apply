@@ -23,7 +23,7 @@
 
 ## 配置与依赖
 
-必要：本客户端、可用浏览器操作能力、本人的 BOSS 登录与授权。无需额外数据库、后台服务、外部 AI API Key 或作者账号。Ego 等浏览器接入能力由使用者当前客户端提供，不包含在本包。Python 3 是可选配置检查工具：`python3 scripts/check_policy.py private/policy.json`。Codex 的可选 Node.js 防护模块不属于 WorkBuddy 依赖。
+必要：本客户端、可用浏览器操作能力、本人的 BOSS 登录与授权。无需额外数据库、后台服务、外部 AI API Key 或作者账号。Ego 等浏览器接入能力由使用者当前客户端提供，不包含在本包。若选择 Agent Browser CLI，包内固定会话入口使用 Node.js 标准库；原生/Ego 不需要这个入口。Python 3 是可选配置检查工具：`python3 scripts/check_policy.py private/policy.json`。Codex 的可选 Node.js 防护模块不属于 WorkBuddy 依赖。
 
 没有默认职业方向、招聘来源偏好、评分权重、通过门槛或特殊评分规则。读取 matching，根据自己的资料填写配置；空白配置不能投递。
 

@@ -18,7 +18,9 @@
     "optional/native-guard/README.md",
     "references/browser-session.md",
     "scripts/doctor.py",
-    "references/setup.md"
+    "references/setup.md",
+    "scripts/browser-session.mjs",
+    "references/agent-browser.md"
   ],
   "boss-apply-workbuddy": [
     "SKILL.md",
@@ -35,6 +37,8 @@
     "references/workbuddy.md",
     "references/browser-session.md",
     "scripts/doctor.py",
-    "references/setup.md"
+    "references/setup.md",
+    "scripts/browser-session.mjs",
+    "references/agent-browser.md"
   ]
 }

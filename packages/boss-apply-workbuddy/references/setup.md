@@ -50,13 +50,9 @@ Windows 用 PowerShell，macOS/Linux 用当前 shell；让客户端生成符合�
 
 按照 [官方会话说明](https://agent-browser.dev/sessions)，为自己的工作区选择稳定会话名，并把独立浏览器 profile 放在自己的 `private/browser-profile/`。`--profile` 必须传该目录的**本机绝对路径**，不用 `Default` 之类可能触发复制其他 Chrome profile 的名称。所有步骤复用同一会话名与路径；不要每条命令重建、close、清空 profile 或恢复 Cookie 文件。
 
-首次启动可由 AI 按本机生成下列形式，两个大写占位符必须替换；这是工具命令形式说明，不能原样执行：
+使用包内固定调用入口，完整步骤见 [Agent Browser 固定配置接入](agent-browser.md)。由 AI 定位已经安装的工具入口并初始化一次，此后 get url、snapshot、真实 click 全部经 `scripts/browser-session.mjs`，不用每条命令自行拼 profile/headed/session。此可选入口使用 Node 标准库；已有 npm 安装通常已有 Node，不另加数据库或服务。
 
-```text
-agent-browser --session LOCAL_SESSION --profile ABSOLUTE_PRIVATE_PROFILE --headed open https://www.zhipin.com/
-```
-
-后续使用该会话的 snapshot、screenshot 和真实 click；引用必须来自刚读取的页面。复用已有页面时不反复 open 列表 URL。不要使用默认会话以免串到别的任务。首次由本人在这个可见浏览器内登录；日后登录能否保持由平台决定。
+同一个 session 名不保证浏览器实例不变：启动选项变化可能导致工具重建浏览器。不要一条命令带 headed/profile、下一条只保留部分；不要混用裸 CLI、batch、新脚本与固定入口。重复 start 被拒绝后保留原页排查，不删除配置重来。
 
 Ego 使用其当前技能文档中的任务空间/页面机制；原生工具使用其当前浏览器或窗口机制，不能套用上述 CLI 参数。工具不支持当前操作系统时走其他受支持路径，不强行运行另一个系统的安装脚本。
 
@@ -72,7 +68,7 @@ Agent Browser 当前文档支持 `connect <port|url>`，由 AI 使用已知的�
 
 按 `browser-session.md` 检查，不生成默认的多岗位评分校准报告：
 
-1. 在真正受控的页面确认官方地址、本人登录、没有验证/风控阻断。
+1. 确认本人能看到真正受控的窗口；分两次独立调用读取仍为同一真实页面。本人登录/验证后，只读原页面继续；配置正确、截图预览或同 URL 不等于页面连续性已通过。
 2. 按本人配置选推荐入口、城市、薪资，核对实际生效的筛选。若入口不支持该条件，明确差异再决定，不暗改需求。
 3. 只读检查至少一次卡片切换：新鲜快照/截图中当前职位与同页 JD 对应；所需字段可见。文本薪资乱码时用截图读可见数字，不调隐藏接口。
 4. 检查完成即可按已确认条件和现有授权进入正常逐岗流程，不要求固定若干岗位的分析报告，也不反复让已授权用户确认。未授权则停在 review。
