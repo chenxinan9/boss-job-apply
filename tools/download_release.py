@@ -12,9 +12,9 @@ import urllib.parse
 import urllib.request
 import zipfile
 
-VERSION='v0.1.2'
+VERSION='v0.2.0'
 REPOSITORY='https://github.com/chenxinan9/boss-job-apply'
-ARCHIVES={'codex': {'name': 'boss-apply-codex-0.1.2.zip', 'sha256': '06870bc3503a52d033c72105272b5820ee67bad23e66009c20782dedcb0b8d2b'}, 'workbuddy': {'name': 'boss-apply-workbuddy-0.1.2.zip', 'sha256': 'cf5e4d44e250e2fc94bf927f77677c67f5c0f2bf3c63d945f06203dac408a4fa'}}
+ARCHIVES={'codex': {'name': 'boss-apply-codex-0.2.0.zip', 'sha256': 'c245e59aa67ce65941b1783db4d041b365338698105f6be897969bf10f6ac9dd'}, 'workbuddy': {'name': 'boss-apply-workbuddy-0.2.0.zip', 'sha256': 'b27c7e026519246932faf0d6c7c0ec599bfe4a8c764cc28801f2c285c3954ad4'}}
 MAX_DOWNLOAD=10*1024*1024
 MAX_UNPACKED=30*1024*1024
 
@@ -79,7 +79,7 @@ def install(client,destination):
         receipt=download(client,archive);root=extract(archive,staging,client)
         shutil.copytree(root,dest)
     receipt['scope']='downloaded workspace only; no private data, client registration, schedule or BOSS action'
-    (dest/'INSTALLATION.json').write_text(json.dumps(receipt,ensure_ascii=False,indent=2)+'\n')
+    (dest/'INSTALLATION.json').write_text(json.dumps(receipt,ensure_ascii=False,indent=2)+'\n', encoding='utf-8', newline='\n')
     return receipt
 
 def main():

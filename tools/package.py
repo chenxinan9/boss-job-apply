@@ -5,10 +5,10 @@ import json
 import zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
-VERSION='0.1.2'
+VERSION='0.2.0'
 
 def build():
-    manifest=json.loads((ROOT/'tools/package-manifest.json').read_text())
+    manifest=json.loads((ROOT/'tools/package-manifest.json').read_text(encoding='utf-8'))
     out=ROOT/'dist'; out.mkdir(exist_ok=True)
     sums=[]
     for package,names in manifest.items():

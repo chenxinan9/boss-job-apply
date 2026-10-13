@@ -16,7 +16,9 @@
     "optional/native-guard/control-signals.mjs",
     "optional/native-guard/control-signals.json",
     "optional/native-guard/README.md",
-    "references/browser-session.md"
+    "references/browser-session.md",
+    "scripts/doctor.py",
+    "references/setup.md"
   ],
   "boss-apply-workbuddy": [
     "SKILL.md",
@@ -31,6 +33,8 @@
     "references/matching.md",
     "docs/validation.md",
     "references/workbuddy.md",
-    "references/browser-session.md"
+    "references/browser-session.md",
+    "scripts/doctor.py",
+    "references/setup.md"
   ]
 }

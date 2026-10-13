@@ -6,11 +6,11 @@
 
 ## 最短开始方法
 
-1. 解压本包，按接入说明加载 SKILL.md。创建本地 private/，复制模板为 private/policy.json 与 private/resume.md，换成自己的资料。模板不含职业、城市、薪资或评分预设；客户端根据本人需求草拟后，须由本人确认。
+1. 解压本包，加载 SKILL.md，按 references/setup.md 完成本机工具接入。创建本地 private/，复制模板为 private/policy.json 与 private/resume.md，换成自己的资料。模板不含职业、城市、薪资或评分预设；客户端根据本人需求草拟后，须由本人确认。
 2. 让客户端读取下列指令，完成准备：
 
 ```text
-请读取本工作区 SKILL.md、执行手册和本客户端接入说明。我的条件在 private/policy.json，简历在 private/resume.md。先用 review，在真实 BOSS 本人登录会话里核对推荐入口、卡片切换和当前 JD，给出少量只读匹配说明，不发送。
+请读取本工作区 SKILL.md、执行手册和本客户端接入说明。我的条件在 private/policy.json，简历在 private/resume.md。先用 review，在真实 BOSS 本人登录会话里核对推荐入口、卡片切换和当前 JD，只做必要的页面与单岗匹配检查，不生成默认多岗位校准报告，不发送。
 ```
 
 3. 准备正确后，由本人发出实际授权：

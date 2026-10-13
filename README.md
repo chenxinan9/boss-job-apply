@@ -7,13 +7,13 @@
 **发给 Codex：**
 
 ```text
-请从 https://github.com/chenxinan9/boss-job-apply 下载最新版 Codex 技能包，按仓库安装说明校验并解压到新的本地文件夹，读取 SKILL.md 和执行手册，再根据我提供的简历与求职需求初始化私有配置；先 review，不创建定时或发送，等我确认条件并明确授权后再投递。
+请从 https://github.com/chenxinan9/boss-job-apply 下载最新版 Codex 技能包，按仓库安装说明校验并解压到新的本地文件夹，读取 SKILL.md，按 references/setup.md 检测并接通本机浏览器，再根据我提供的简历与求职需求初始化私有配置；先 review，不创建定时或发送，等我确认条件并明确授权后再投递。
 ```
 
 **发给 WorkBuddy：**
 
 ```text
-请从 https://github.com/chenxinan9/boss-job-apply 下载最新版 WorkBuddy 技能包，按仓库安装说明校验并解压到新的本地文件夹，读取 SKILL.md 和执行手册，再根据我提供的简历与求职需求初始化私有配置；先 review，不创建定时或发送，等我确认条件并明确授权后再投递。
+请从 https://github.com/chenxinan9/boss-job-apply 下载最新版 WorkBuddy 技能包，按仓库安装说明校验并解压到新的本地文件夹，读取 SKILL.md，按 references/setup.md 检测并接通本机浏览器，再根据我提供的简历与求职需求初始化私有配置；先 review，不创建定时或发送，等我确认条件并明确授权后再投递。
 ```
 
 ## 一行命令下载
@@ -23,28 +23,28 @@
 **macOS / Linux · Codex**
 
 ```sh
-curl --fail --location --proto '=https' --proto-redir '=https' https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.1.2/tools/download_release.py -o boss-skill-install.py && python3 boss-skill-install.py --client codex
+curl --fail --location --proto '=https' --proto-redir '=https' https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.2.0/tools/download_release.py -o boss-skill-install.py && python3 boss-skill-install.py --client codex
 ```
 
 **macOS / Linux · WorkBuddy**
 
 ```sh
-curl --fail --location --proto '=https' --proto-redir '=https' https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.1.2/tools/download_release.py -o boss-skill-install.py && python3 boss-skill-install.py --client workbuddy
+curl --fail --location --proto '=https' --proto-redir '=https' https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.2.0/tools/download_release.py -o boss-skill-install.py && python3 boss-skill-install.py --client workbuddy
 ```
 
 **Windows PowerShell · Codex**
 
 ```powershell
-& { $ErrorActionPreference='Stop'; Invoke-WebRequest 'https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.1.2/tools/download_release.py' -OutFile 'boss-skill-install.py'; py -3 boss-skill-install.py --client codex }
+& { $ErrorActionPreference='Stop'; Invoke-WebRequest 'https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.2.0/tools/download_release.py' -OutFile 'boss-skill-install.py'; py -3 boss-skill-install.py --client codex }
 ```
 
 **Windows PowerShell · WorkBuddy**
 
 ```powershell
-& { $ErrorActionPreference='Stop'; Invoke-WebRequest 'https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.1.2/tools/download_release.py' -OutFile 'boss-skill-install.py'; py -3 boss-skill-install.py --client workbuddy }
+& { $ErrorActionPreference='Stop'; Invoke-WebRequest 'https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.2.0/tools/download_release.py' -OutFile 'boss-skill-install.py'; py -3 boss-skill-install.py --client workbuddy }
 ```
 
-也可不装 Python，直接下载 [Codex ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.1.2/boss-apply-codex-0.1.2.zip) 或 [WorkBuddy ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.1.2/boss-apply-workbuddy-0.1.2.zip)，使用 [SHA256SUMS](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.1.2/SHA256SUMS) 核对后解压。完整[安装说明](docs/install.md)。
+也可不装 Python，直接下载 [Codex ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.2.0/boss-apply-codex-0.2.0.zip) 或 [WorkBuddy ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.2.0/boss-apply-workbuddy-0.2.0.zip)，使用 [SHA256SUMS](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.2.0/SHA256SUMS) 核对后解压。完整[安装说明](docs/install.md)。
 
 ## 填自己的资料，再运行
 
@@ -56,6 +56,8 @@ curl --fail --location --proto '=https' --proto-redir '=https' https://raw.githu
 修改简历只改自己的 resume.md，条件与日程独立。同一 BOSS 账号只选一个客户端执行。该流程处理首次沟通，不自动上传附件或改招呼语。
 
 ## 浏览器接入与故障恢复
+
+两端共用 [首次接入向导](packages/boss-apply-workbuddy/references/setup.md) 和可选只读 `scripts/doctor.py`。优先现有原生工具、Ego 或 Agent Browser；没有工具再走官方安装路径。覆盖 Windows/macOS/Linux 的接入分支，分支测试不等于各系统实机验收。登录、客户端服务报错、页面读取异常分别处理，首次无需默认的多岗位校准报告。
 
 首次使用先确认本机实际可用的浏览器工具和登录页面，再核对推荐入口与当前筛选；不能先在无关列表里开发抓取程序。读取失败时按 [浏览器接入与有限恢复](packages/boss-apply-workbuddy/references/browser-session.md) 处理。任务运行中不生成另一个投递驱动，不靠修改 Cookie、接口补数或重复刷新继续。
 
