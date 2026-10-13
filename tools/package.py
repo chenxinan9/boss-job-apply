@@ -20,6 +20,7 @@ def build():
                 if not path.is_relative_to(base) or (base/name).is_symlink() or not path.is_file():
                     raise ValueError('Invalid source: '+name)
                 info=zipfile.ZipInfo(package+'/'+name,date_time=(2026,10,12,0,0,0))
+                info.create_system=3  # Stable ZIP metadata across build operating systems.
                 info.compress_type=zipfile.ZIP_DEFLATED
                 info.external_attr=0o644<<16
                 z.writestr(info,path.read_bytes())

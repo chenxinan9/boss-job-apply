@@ -45,7 +45,9 @@ def extract(archive,staging,client):
         infos=z.infolist();seen=set();files=[]
         if len(infos)>1000 or sum(i.file_size for i in infos)>MAX_UNPACKED:raise ValueError('解包大小超限')
         for info in infos:
-            name=info.filename.rstrip('/') if info.is_dir() else info.filename
+            # ZipInfo may normalize backslashes on Windows; validate the original member name.
+            raw_name=info.orig_filename
+            name=raw_name.rstrip('/') if info.is_dir() else raw_name
             parts=name.split('/');path=PurePosixPath(name);key=unicodedata.normalize('NFC',name).casefold()
             kind=stat.S_IFMT(info.external_attr>>16)
             if ('\\' in name or '\x00' in name or path.is_absolute() or any(p in ('','.','..') or ':' in p for p in parts) or parts[0]!=package or key in seen or info.flag_bits&1 or kind not in (0,stat.S_IFREG,stat.S_IFDIR)):

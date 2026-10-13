@@ -18,7 +18,12 @@ class DownloadTest(unittest.TestCase):
         p=self.root/'bundle.zip'
         with zipfile.ZipFile(p,'w') as z:
             z.writestr('boss-apply-codex/SKILL.md','# Test input');z.writestr('boss-apply-codex/LICENSE','Test input')
-            for name,value in extra:z.writestr(name,value)
+            for name,value in extra:
+                if isinstance(name,str):
+                    member=zipfile.ZipInfo(name)
+                    member.filename=name  # Preserve the deliberately malformed fixture on Windows.
+                else:member=name
+                z.writestr(member,value)
         return p
     def test_existing_destination_preserved(self):
         d=self.root/'existing';d.mkdir();(d/'keep').write_text('keep')
