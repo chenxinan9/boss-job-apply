@@ -4,6 +4,12 @@
 
 下载指令与两端一句话安装提示见 [仓库首页](https://github.com/chenxinan9/boss-job-apply#一句话交给软件)。
 
+## 下载失败或更新
+
+从本项目 GitHub Releases 取对应 ZIP 和 SHA256SUMS，**哈希完全一致且 ZIP 完整才能解压使用**。下载中断、空文件或半截包都不是有效技能包；不在残缺目录中继续接入。已有目录不覆盖，重下到新目录。
+
+AI 下载优先使用仓库的一行校验下载器。有网络异常时限制单次 60 秒、最多一次重试；curl 需 `--fail --location --connect-timeout 10 --max-time 60`。宿主中断 curl 时可用 Python 标准库的有超时 HTTPS 下载，再比对 SHA256SUMS。两种方式都失败则明确网络阻断，不换未知镜像、不关闭 TLS 校验、不循环重试。SHA-256 校验依赖可信的 GitHub HTTPS 发布来源，不是独立发布者签名。
+
 ## 最短开始方法
 
 1. 解压本包，加载 SKILL.md，按 references/setup.md 完成本机工具接入。创建本地 private/，复制模板为 private/policy.json 与 private/resume.md，换成自己的资料。模板不含职业、城市、薪资或评分预设；客户端根据本人需求草拟后，须由本人确认。

@@ -20,6 +20,7 @@ def gate(value, allow_empty=False):
 
 
 def validate(p):
+    if not isinstance(p,dict): raise ValueError('配置顶层必须是JSON对象')
     if p.get('schema_version') != 2: raise ValueError('请按当前空白模板准备配置并由本人确认')
     if p.get('mode') not in ('review','apply'): raise ValueError('mode 必须是 review/apply')
     if type(p.get('requirements_confirmed')) is not bool: raise ValueError('requirements_confirmed 必须为布尔值')
@@ -64,9 +65,14 @@ def validate(p):
     for key in ('historical_dedupe','post_send_verification','per_job_records'):
         if p.get(key) is not False: raise ValueError(key+' 与本流程不符')
     if p.get('completion')!='CURRENT_PLATFORM_DAILY_CAP': raise ValueError('完成依据须为平台当前满额提示')
-    ready=bool(p['requirements_confirmed'] and s['city'].strip() and all(s[k] for k in ('recommendation_tabs','salary_bands','keywords')) and p['allowed_recruiter_types'] and p['allowed_scope'] and dims and scoring['default']['threshold'] is not None)
-    if p['requirements_confirmed'] and not ready: raise ValueError('本人确认之前必须补齐条件与评分')
-    if p['mode']=='apply' and not ready: raise ValueError('空白或未确认的配置不能apply')
+    required={'requirements_confirmed':p['requirements_confirmed'], 'search.city':s['city'].strip(),
+              **{'search.'+k:s[k] for k in ('recommendation_tabs','salary_bands','keywords')},
+              'allowed_recruiter_types':p['allowed_recruiter_types'], 'allowed_scope':p['allowed_scope'],
+              'scoring.dimensions':dims, 'scoring.default.threshold':scoring['default']['threshold'] is not None}
+    missing=[key for key,value in required.items() if not value]
+    ready=not missing
+    if (p['requirements_confirmed'] or p['mode']=='apply') and not ready:
+        raise ValueError('缺少或未确认：'+', '.join(missing))
     if sch['enabled'] and (p['mode']!='apply' or not ready or not sch['timezone'].strip() or not sch['time']): raise ValueError('启用定时前须完成本人条件、apply模式、时区与时间')
     return ready
 

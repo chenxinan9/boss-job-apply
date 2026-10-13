@@ -2,7 +2,8 @@
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { createServer } from 'node:http';
-import { mkdtempSync, readFileSync, writeFileSync, rmSync, realpathSync } from 'node:fs';
+import { mkdtempSync, readFileSync, writeFileSync, realpathSync } from 'node:fs';
+import { rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -50,5 +51,5 @@ try {
   }
   server.close();
   // Windows releases the daemon's working-directory handle shortly after close replies.
-  rmSync(cwd, { recursive: true, force: true, maxRetries: 10, retryDelay: 200 });
+  await rm(cwd, { recursive: true, force: true, maxRetries: 10, retryDelay: 200 });
 }

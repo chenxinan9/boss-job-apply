@@ -20,6 +20,10 @@ class PolicyTest(unittest.TestCase):
         p['scoring']['dimensions']=[{'id':'a','label':'测试维度甲','criterion':'测试条件甲','max_score':50},{'id':'b','label':'测试维度乙','criterion':'测试条件乙','max_score':50}]
         p['scoring']['default']={'operator':'>=','threshold':70}
         return p
+    def test_missing_fields_named_and_non_object_rejected(self):
+        with self.assertRaisesRegex(ValueError,'JSON对象'):self.validate([])
+        p=self.ready();p['scoring']['default']['threshold']=None
+        with self.assertRaisesRegex(ValueError,'scoring.default.threshold'):self.validate(p)
     def test_blank_template_is_draft(self):
         self.assertFalse(self.validate(self.p));self.assertFalse(self.p['requirements_confirmed'])
         self.assertEqual(self.p['scoring']['dimensions'],[]);self.assertEqual(self.p['scoring']['special_rules'],[])
