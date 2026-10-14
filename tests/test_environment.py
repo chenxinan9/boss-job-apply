@@ -41,6 +41,20 @@ class EnvironmentTest(unittest.TestCase):
         result = self.inspect(client='workbuddy', exposed_tools=['ego'])
         self.assertEqual(result['selected_route'], 'ego')
 
+    def test_new_workspace_requires_discovery_before_browser_creation(self):
+        for system in ('Darwin', 'Windows', 'Linux'):
+            for provider in ('native', 'ego', 'agent-browser'):
+                for client in ('codex', 'workbuddy'):
+                    with self.subTest(system=system, provider=provider, client=client):
+                        result = self.inspect(client=client, system=system, exposed_tools=[provider])
+                        self.assertEqual(result['next_action'], 'DISCOVER_EXISTING_SESSIONS')
+                        self.assertTrue(result['session_discovery_required'])
+                        self.assertFalse(result['browser_ready'])
+                        known = self.inspect(client=client, system=system,
+                                             exposed_tools=[provider], existing_session=provider)
+                        self.assertFalse(known['session_discovery_required'])
+                        self.assertEqual(known['next_action'], 'CHECK_EXISTING_SESSION')
+
     def test_unavailable_current_tool_never_silently_switches(self):
         result = self.inspect(client='workbuddy', existing_session='ego', commands=['agent-browser'])
         self.assertEqual(result['next_action'], 'RECONNECT_EXISTING_TOOL')

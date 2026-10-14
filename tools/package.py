@@ -5,7 +5,7 @@ import json
 import zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
-VERSION='0.3.1'
+VERSION='0.3.2'
 
 def build():
     manifest=json.loads((ROOT/'tools/package-manifest.json').read_text(encoding='utf-8'))

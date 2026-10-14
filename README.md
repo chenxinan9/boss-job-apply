@@ -23,28 +23,28 @@
 **macOS / Linux · Codex**
 
 ```sh
-curl --fail --location --connect-timeout 10 --max-time 60 --proto '=https' --proto-redir '=https' https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.3.1/tools/download_release.py -o boss-skill-install.py && python3 boss-skill-install.py --client codex
+curl --fail --location --connect-timeout 10 --max-time 60 --proto '=https' --proto-redir '=https' https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.3.2/tools/download_release.py -o boss-skill-install.py && python3 boss-skill-install.py --client codex
 ```
 
 **macOS / Linux · WorkBuddy**
 
 ```sh
-curl --fail --location --connect-timeout 10 --max-time 60 --proto '=https' --proto-redir '=https' https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.3.1/tools/download_release.py -o boss-skill-install.py && python3 boss-skill-install.py --client workbuddy
+curl --fail --location --connect-timeout 10 --max-time 60 --proto '=https' --proto-redir '=https' https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.3.2/tools/download_release.py -o boss-skill-install.py && python3 boss-skill-install.py --client workbuddy
 ```
 
 **Windows PowerShell · Codex**
 
 ```powershell
-& { $ErrorActionPreference='Stop'; Invoke-WebRequest 'https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.3.1/tools/download_release.py' -OutFile 'boss-skill-install.py' -TimeoutSec 60; py -3 boss-skill-install.py --client codex }
+& { $ErrorActionPreference='Stop'; Invoke-WebRequest 'https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.3.2/tools/download_release.py' -OutFile 'boss-skill-install.py' -TimeoutSec 60; py -3 boss-skill-install.py --client codex }
 ```
 
 **Windows PowerShell · WorkBuddy**
 
 ```powershell
-& { $ErrorActionPreference='Stop'; Invoke-WebRequest 'https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.3.1/tools/download_release.py' -OutFile 'boss-skill-install.py' -TimeoutSec 60; py -3 boss-skill-install.py --client workbuddy }
+& { $ErrorActionPreference='Stop'; Invoke-WebRequest 'https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.3.2/tools/download_release.py' -OutFile 'boss-skill-install.py' -TimeoutSec 60; py -3 boss-skill-install.py --client workbuddy }
 ```
 
-也可不装 Python，直接下载 [Codex ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.3.1/boss-apply-codex-0.3.1.zip) 或 [WorkBuddy ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.3.1/boss-apply-workbuddy-0.3.1.zip)，使用 [SHA256SUMS](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.3.1/SHA256SUMS) 核对后解压。完整[安装说明](docs/install.md)。
+也可不装 Python，直接下载 [Codex ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.3.2/boss-apply-codex-0.3.2.zip) 或 [WorkBuddy ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.3.2/boss-apply-workbuddy-0.3.2.zip)，使用 [SHA256SUMS](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.3.2/SHA256SUMS) 核对后解压。完整[安装说明](docs/install.md)。
 
 ## 填自己的资料，再运行
 
@@ -56,6 +56,8 @@ curl --fail --location --connect-timeout 10 --max-time 60 --proto '=https' --pro
 修改简历只改自己的 resume.md，条件与日程独立。同一 BOSS 账号只选一个客户端执行。该流程处理首次沟通，不自动上传附件或改招呼语。
 
 ## 浏览器接入与故障恢复
+
+新任务先通过浏览器工具发现本人已有窗口；不用旧简历/配置不等于必须另开浏览器。本人看到的页面与工具报告不一致时，先核对窗口身份。即时验证不创建定时任务。
 
 Agent Browser CLI 现使用包内固定会话入口，防止后续调用遗漏可见窗口/profile 参数；正常原生或 Ego 会话继续沿用。接入必须通过两次独立调用和本人验证后的同页读取。
 
@@ -78,7 +80,7 @@ Agent Browser CLI 现使用包内固定会话入口，防止后续调用遗漏�
 
 日常运行依赖客户端、其实际可用的浏览器工具及本人登录。没有必需的数据库、后台服务器、额外模型 API Key 或作者账号。Python 仅用于一行下载/配置检查；Codex 可选原生保护模块使用 Node.js 标准库。第三方客户端和浏览器本身不包含在本仓库。
 
-原 Codex/macOS 工作流有平台满额观察；WorkBuddy/macOS 真实会话可发送。通用包在全新机器的完整投递、WorkBuddy 连续满额、Windows 实机尚未验收。[验证范围](docs/validation.md)。
+验收要求：客户端自行从 GitHub 下载，依据本人资料生成配置，按要求完成真实首次沟通；不能依赖作者补操作提示或手改测试配置，不以投满额度为必要条件。原 Codex/macOS 工作流和旧 WorkBuddy 会话的发送记录不代表当前公开包独立上手已通过。当前公开包完整独立上手及 Windows 实机仍未验收。[验证范围](docs/validation.md)。
 
 ## 开发与开源
 

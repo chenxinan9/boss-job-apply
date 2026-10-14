@@ -25,7 +25,7 @@ def inspect_environment(client, exposed_tools=(), existing_session=None, system=
     elif existing_session:
         route, action = existing_session, "CHECK_EXISTING_SESSION"
     elif candidates:
-        route, action = candidates[0], "READ_TOOL_DOCS_AND_CHECK_PAGE"
+        route, action = candidates[0], "DISCOVER_EXISTING_SESSIONS"
     elif client == "workbuddy":
         route, action = None, "CHECK_SKILLHUB_AGENT_BROWSER"
     elif available["npm"]:
@@ -38,9 +38,11 @@ def inspect_environment(client, exposed_tools=(), existing_session=None, system=
         "command_presence": available, "client_exposed_tools": sorted(set(exposed_tools)),
         "existing_session_provider": existing_session, "candidate_providers": candidates,
         "selected_route": route, "next_action": action,
+        "session_discovery_required": bool(route and not existing_session),
         "status": "ENVIRONMENT_ONLY", "browser_ready": False, "send_authorized": False,
         "instructions": "references/setup.md",
         "limitations": ["PATH presence is not working browser access",
+                        "no supplied session does not mean no existing browser; discover before creating",
                         "client tools must be supplied from the actual exposed tool list",
                         "login, permissions and live page checks remain required"],
     }
@@ -51,7 +53,7 @@ def main():
     parser.add_argument("--tool", action="append", default=[], choices=PROVIDERS,
                         help="only tools actually exposed by the current client")
     parser.add_argument("--existing-session", choices=PROVIDERS,
-                        help="known current controller; never infer from another browser window")
+                        help="provider of an observed reusable session, including one opened before this task")
     args = parser.parse_args()
     result = inspect_environment(args.client, args.tool, args.existing_session)
     # ASCII JSON remains readable on legacy Windows console encodings.
