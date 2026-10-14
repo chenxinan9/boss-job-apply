@@ -3,7 +3,7 @@ name: boss-apply-workbuddy
 description: 在WorkBuddy中按本人简历与条件审核真实 BOSS 岗位；本人授权后逐岗首次沟通，先推荐后搜索，平台满额或真实阻断时停止。无历史去重、投后核验及逐岗台账。
 description_zh: WorkBuddy 真实 BOSS 岗位审核与本人授权后的逐岗首次沟通。
 description_en: Review real BOSS job listings and initiate contact through WorkBuddy with the account owner authorization.
-version: 0.3.3
+version: 0.3.4
 author: BOSS Job Apply contributors
 ---
 
