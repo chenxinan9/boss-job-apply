@@ -1,5 +1,7 @@
 # 下载与初始化
 
+**当前公开包尚未完成独立实站验收。WorkBuddy Windows 已有接入失败反馈，暂不推荐普通使用者试跑。** 下载命令供开发与复现使用；兼容缺口见[审计说明](workbuddy-host-audit.md)。安装成功不解决宿主控制链路故障，也不应让使用者反复重新登录。
+
 首页提供两端可复制给 AI 的一句话指令，以及 macOS/Linux 和 Windows PowerShell 一行命令。下载器只依赖 Python 3.10+ 标准库，固定 release 版本与 SHA-256；不会安装客户端、读取简历、注册自动化、连接 BOSS 或执行发送。
 
 不想运行脚本可直接下载 ZIP，按 release 的 SHA256SUMS 核对。macOS 用 `shasum -a 256 文件.zip`；Windows PowerShell 用 `Get-FileHash 文件.zip -Algorithm SHA256`。

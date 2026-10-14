@@ -2,7 +2,9 @@
 
 让 Codex 或 WorkBuddy 读取**你自己的简历和需求**，在本人登录的真实 BOSS 上逐岗判断并首次沟通。两套独立技能包；没有作者的职业背景、城市薪资、评分权重或特殊岗位预设。
 
-## 一句话交给软件
+> **交付状态（2026-10-14）：当前公开包仍未通过“独立下载 → 本人配置 → 真实首次沟通”的完整验收。WorkBuddy / Windows 已有零外发失败反馈，暂不推荐非技术使用者安装试跑。** v0.3.3 固定入口与宿主注入的 Agent Browser 参数存在兼容缺口；代码测试通过不等于宿主实站通过。以下下载保留供开发排查，不是已验收产品的推荐入口。已有使用者保留自己的资料与正常会话，不需要反复重装或重登。见[已知接入问题与交付门槛](docs/workbuddy-host-audit.md)。
+
+## 一句话交给软件（开发候选，未验收）
 
 **发给 Codex：**
 
@@ -61,7 +63,7 @@ curl --fail --location --connect-timeout 10 --max-time 60 --proto '=https' --pro
 
 Agent Browser CLI 现使用包内固定会话入口，防止后续调用遗漏可见窗口/profile 参数；正常原生或 Ego 会话继续沿用。接入必须通过两次独立调用和本人验证后的同页读取。
 
-两端共用 [首次接入向导](packages/boss-apply-workbuddy/references/setup.md) 和可选只读 `scripts/doctor.py`。优先现有原生工具、Ego 或 Agent Browser；没有工具再走官方安装路径。覆盖 Windows/macOS/Linux 的接入分支，分支测试不等于各系统实机验收。登录、客户端服务报错、页面读取异常分别处理，首次无需默认的多岗位校准报告。
+两端共用 [首次接入向导](packages/boss-apply-workbuddy/references/setup.md) 和可选只读 `scripts/doctor.py`。优先现有原生工具、Ego 或 Agent Browser；没有工具再走官方安装路径。提供 Windows/macOS/Linux 的接入说明；WorkBuddy Windows 宿主兼容已出现失败，不能把说明覆盖当作支持承诺。登录、客户端服务报错、页面读取异常分别处理，首次无需默认的多岗位校准报告。
 
 首次使用先确认本机实际可用的浏览器工具和登录页面，再核对推荐入口与当前筛选；不能先在无关列表里开发抓取程序。读取失败时按 [浏览器接入与有限恢复](packages/boss-apply-workbuddy/references/browser-session.md) 处理。任务运行中不生成另一个投递驱动，不靠修改 Cookie、接口补数或重复刷新继续。
 
