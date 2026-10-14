@@ -7,13 +7,13 @@
 **发给 Codex：**
 
 ```text
-请从 https://github.com/chenxinan9/boss-job-apply 下载最新版 Codex 技能包，按仓库安装说明校验并解压到新的本地文件夹，读取 SKILL.md，按 references/setup.md 检测并接通本机浏览器，再根据我提供的简历与求职需求初始化私有配置；先 review，不创建定时或发送，等我确认条件并明确授权后再投递。
+请从 https://github.com/chenxinan9/boss-job-apply 下载最新版 Codex 技能包，按仓库安装说明校验并解压到新的本地文件夹，读取 SKILL.md，按 references/setup.md 检测并接通本机浏览器；允许复用并接管我明确指定的已有 BOSS 窗口，目标不明先让我选定，再根据我提供的简历与求职需求初始化私有配置；先 review，不创建定时或发送，等我确认条件并明确授权后再投递。
 ```
 
 **发给 WorkBuddy：**
 
 ```text
-请从 https://github.com/chenxinan9/boss-job-apply 下载最新版 WorkBuddy 技能包，按仓库安装说明校验并解压到新的本地文件夹，读取 SKILL.md，按 references/setup.md 检测并接通本机浏览器，再根据我提供的简历与求职需求初始化私有配置；先 review，不创建定时或发送，等我确认条件并明确授权后再投递。
+请从 https://github.com/chenxinan9/boss-job-apply 下载最新版 WorkBuddy 技能包，按仓库安装说明校验并解压到新的本地文件夹，读取 SKILL.md，按 references/setup.md 检测并接通本机浏览器；允许复用并接管我明确指定的已有 BOSS 窗口，目标不明先让我选定，再根据我提供的简历与求职需求初始化私有配置；先 review，不创建定时或发送，等我确认条件并明确授权后再投递。
 ```
 
 ## 一行命令下载
@@ -23,28 +23,28 @@
 **macOS / Linux · Codex**
 
 ```sh
-curl --fail --location --connect-timeout 10 --max-time 60 --proto '=https' --proto-redir '=https' https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.3.2/tools/download_release.py -o boss-skill-install.py && python3 boss-skill-install.py --client codex
+curl --fail --location --connect-timeout 10 --max-time 60 --proto '=https' --proto-redir '=https' https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.3.3/tools/download_release.py -o boss-skill-install.py && python3 boss-skill-install.py --client codex
 ```
 
 **macOS / Linux · WorkBuddy**
 
 ```sh
-curl --fail --location --connect-timeout 10 --max-time 60 --proto '=https' --proto-redir '=https' https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.3.2/tools/download_release.py -o boss-skill-install.py && python3 boss-skill-install.py --client workbuddy
+curl --fail --location --connect-timeout 10 --max-time 60 --proto '=https' --proto-redir '=https' https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.3.3/tools/download_release.py -o boss-skill-install.py && python3 boss-skill-install.py --client workbuddy
 ```
 
 **Windows PowerShell · Codex**
 
 ```powershell
-& { $ErrorActionPreference='Stop'; Invoke-WebRequest 'https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.3.2/tools/download_release.py' -OutFile 'boss-skill-install.py' -TimeoutSec 60; py -3 boss-skill-install.py --client codex }
+& { $ErrorActionPreference='Stop'; Invoke-WebRequest 'https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.3.3/tools/download_release.py' -OutFile 'boss-skill-install.py' -TimeoutSec 60; py -3 boss-skill-install.py --client codex }
 ```
 
 **Windows PowerShell · WorkBuddy**
 
 ```powershell
-& { $ErrorActionPreference='Stop'; Invoke-WebRequest 'https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.3.2/tools/download_release.py' -OutFile 'boss-skill-install.py' -TimeoutSec 60; py -3 boss-skill-install.py --client workbuddy }
+& { $ErrorActionPreference='Stop'; Invoke-WebRequest 'https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.3.3/tools/download_release.py' -OutFile 'boss-skill-install.py' -TimeoutSec 60; py -3 boss-skill-install.py --client workbuddy }
 ```
 
-也可不装 Python，直接下载 [Codex ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.3.2/boss-apply-codex-0.3.2.zip) 或 [WorkBuddy ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.3.2/boss-apply-workbuddy-0.3.2.zip)，使用 [SHA256SUMS](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.3.2/SHA256SUMS) 核对后解压。完整[安装说明](docs/install.md)。
+也可不装 Python，直接下载 [Codex ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.3.3/boss-apply-codex-0.3.3.zip) 或 [WorkBuddy ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.3.3/boss-apply-workbuddy-0.3.3.zip)，使用 [SHA256SUMS](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.3.3/SHA256SUMS) 核对后解压。完整[安装说明](docs/install.md)。
 
 ## 填自己的资料，再运行
 
