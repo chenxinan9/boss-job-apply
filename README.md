@@ -1,93 +1,40 @@
-# BOSS Job Apply · Codex / WorkBuddy
+# BOSS Job Apply
 
-让 Codex 或 WorkBuddy 读取**你自己的简历和需求**，在本人登录的真实 BOSS 上逐岗判断并首次沟通。两套独立技能包；没有作者的职业背景、城市薪资、评分权重或特殊岗位预设。
+用自己的简历和求职条件，让客户端逐岗判断并首次沟通。MIT 开源，个人资料留在本地。
 
-> **交付状态（2026-10-14）：当前公开包仍未通过“独立下载 → 本人配置 → 真实首次沟通”的完整验收。WorkBuddy / Windows 已有零外发失败反馈，暂不推荐非技术使用者安装试跑。** v0.3.3 固定入口与宿主注入的 Agent Browser 参数存在兼容缺口；代码测试通过不等于宿主实站通过。以下下载保留供开发排查，不是已验收产品的推荐入口。已有使用者保留自己的资料与正常会话，不需要反复重装或重登。见[已知接入问题与交付门槛](docs/workbuddy-host-audit.md)。
+**当前：v0.4.0-rc.1 开发预发行，尚未通过 WorkBuddy 独立真实发送与持续投递验收，暂不能作为交付给非技术朋友的可用版本。** 安装、静态检查不算投递成功。Windows 尚缺本机实测；macOS 仍须验证当前 WorkBuddy 的电脑操作工具。见[证据与验收](docs/workbuddy-desktop-scope.md)。
 
-## 一句话交给软件（开发候选，未验收）
+## WorkBuddy：一句话下载并执行
 
-**发给 Codex：**
-
-```text
-请从 https://github.com/chenxinan9/boss-job-apply 下载最新版 Codex 技能包，按仓库安装说明校验并解压到新的本地文件夹，读取 SKILL.md，按 references/setup.md 检测并接通本机浏览器；允许复用并接管我明确指定的已有 BOSS 窗口，目标不明先让我选定，再根据我提供的简历与求职需求初始化私有配置；先 review，不创建定时或发送，等我确认条件并明确授权后再投递。
-```
-
-**发给 WorkBuddy：**
+把下面一句话发给自己的 WorkBuddy，Windows 和 macOS 通用：
 
 ```text
-请从 https://github.com/chenxinan9/boss-job-apply 下载最新版 WorkBuddy 技能包，按仓库安装说明校验并解压到新的本地文件夹，读取 SKILL.md，按 references/setup.md 检测并接通本机浏览器；允许复用并接管我明确指定的已有 BOSS 窗口，目标不明先让我选定，再根据我提供的简历与求职需求初始化私有配置；先 review，不创建定时或发送，等我确认条件并明确授权后再投递。
+请从 https://github.com/chenxinan9/boss-job-apply/releases/tag/v0.4.0-rc.1 下载匹配当前系统的 WorkBuddy ZIP（Windows 选 workbuddy-windows，Mac 选 workbuddy-macos），核对该页 SHA256SUMS 后解压并读取 SKILL.md；保留我已有的简历、求职需求与确认条件，用电脑界面操作系统已有浏览器，不安装浏览器、不创建定时；先确认你实际具有电脑操作工具，按包自主执行，缺失资料只问缺项；我已授权的投递直接继续，未授权则只审核，真实阻断如实报告。
 ```
 
-## 一行命令下载
+| 下载 | 操作方式 | 包内文件 |
+|---|---|---|
+| [Windows WorkBuddy ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.4.0-rc.1/boss-apply-workbuddy-windows-0.4.0-rc.1.zip) | 电脑界面操作系统 Edge | SKILL.md、LICENSE |
+| [macOS WorkBuddy ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.4.0-rc.1/boss-apply-workbuddy-macos-0.4.0-rc.1.zip) | 电脑界面操作系统 Safari | SKILL.md、LICENSE |
+| [Codex ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.4.0-rc.1/boss-apply-codex-0.4.0-rc.1.zip) | 保留原 Codex 包，读取其 SKILL.md | 原有文件未改 |
 
-需要 Python 3.10+。命令在当前目录创建 `boss-apply-codex` 或 `boss-apply-workbuddy`；目录已存在则停止，不覆盖。下载的是可读取的技能工作区，客户端技能注册按对应接入说明完成。
+[校验值 SHA256SUMS](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.4.0-rc.1/SHA256SUMS) · [命令下载与更新](docs/install.md)。ZIP 可用系统自带解压功能；不需要安装 Python、Node、额外浏览器或数据库。技能说明不能为客户端补出缺失的电脑操作能力。
 
-**macOS / Linux · Codex**
-
-```sh
-curl --fail --location --connect-timeout 10 --max-time 60 --proto '=https' --proto-redir '=https' https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.3.4/tools/download_release.py -o boss-skill-install.py && python3 boss-skill-install.py --client codex
+给 Codex 的一句话：
+```text
+请从 https://github.com/chenxinan9/boss-job-apply/releases/tag/v0.4.0-rc.1 下载 Codex ZIP，校验后读取 SKILL.md，保留我已有简历与求职条件，依包执行；未获得投递授权时仅审核，不创建定时。
 ```
 
-**macOS / Linux · WorkBuddy**
+## 运行原则
 
-```sh
-curl --fail --location --connect-timeout 10 --max-time 60 --proto '=https' --proto-redir '=https' https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.3.4/tools/download_release.py -o boss-skill-install.py && python3 boss-skill-install.py --client workbuddy
-```
+模型理解当前画面、JD 和本人经历，自主判断下一步。按本人推荐入口与薪资组合处理到底，再关键词搜索；核实当前岗位合格后，单次立即沟通，必要收起挡层后下一岗。不做逐岗台账、历史去重或投后核验。本人条件不会随技能更新或换简历改变。
 
-**Windows PowerShell · Codex**
+真实登录、验证、权限交给本人处理；同一账号仅一个执行者。首次成功、持续执行、当日满额分别验收，点击数不冒充成功数。未通过电脑操作能力检查，不另造浏览器驱动兜底。
 
-```powershell
-& { $ErrorActionPreference='Stop'; Invoke-WebRequest 'https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.3.4/tools/download_release.py' -OutFile 'boss-skill-install.py' -TimeoutSec 60; py -3 boss-skill-install.py --client codex }
-```
+旧 WorkBuddy 浏览器方案保留在历史版本与源码中用于追溯，已退出本次发行清单。新版不读取旧技能的执行说明，个人材料仍可原样保留。完整独立验收前，不把本候选标记为稳定版。
 
-**Windows PowerShell · WorkBuddy**
+## 开发
 
-```powershell
-& { $ErrorActionPreference='Stop'; Invoke-WebRequest 'https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.3.4/tools/download_release.py' -OutFile 'boss-skill-install.py' -TimeoutSec 60; py -3 boss-skill-install.py --client workbuddy }
-```
+`python3 tools/package.py` → `python3 -m unittest discover -s tests -v`；旧浏览器代码回归用 `node --test tests/*.test.mjs`。新 WorkBuddy 包只白名单收录两个文件，实站另行验收。
 
-也可不装 Python，直接下载 [Codex ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.3.4/boss-apply-codex-0.3.4.zip) 或 [WorkBuddy ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.3.4/boss-apply-workbuddy-0.3.4.zip)，使用 [SHA256SUMS](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.3.4/SHA256SUMS) 核对后解压。完整[安装说明](docs/install.md)。
-
-## 填自己的资料，再运行
-
-1. 打开下载文件夹，让客户端读取 SKILL.md。分别见 [Codex 接入](packages/boss-apply-codex/references/codex.md)、[WorkBuddy 接入](packages/boss-apply-workbuddy/references/workbuddy.md)。
-2. 复制 templates/ 空白模板到自己的 private/policy.json、private/resume.md。客户端根据你提供的资料草拟条件；城市、职位入口、薪资、关键词、允许来源、排除项、评分维度/权重/门槛由你确认。
-3. 默认 review、requirements_confirmed=false、定时关闭。条件没填好就不能 apply。先核对真实列表、当前 JD 与简历判断。
-4. 本人确认并授权后，客户端才单次点击“立即沟通”。需要定时再按客户端界面配置；修改 JSON 不会自动创建任务。
-
-修改简历只改自己的 resume.md，条件与日程独立。同一 BOSS 账号只选一个客户端执行。该流程处理首次沟通，不自动上传附件或改招呼语。
-
-## 浏览器接入与故障恢复
-
-新任务先通过浏览器工具发现本人已有窗口；不用旧简历/配置不等于必须另开浏览器。本人看到的页面与工具报告不一致时，先核对窗口身份。即时验证不创建定时任务。
-
-Agent Browser CLI 现使用包内固定会话入口，防止后续调用遗漏可见窗口/profile 参数；正常原生或 Ego 会话继续沿用。接入必须通过两次独立调用和本人验证后的同页读取。
-
-两端共用 [首次接入向导](packages/boss-apply-workbuddy/references/setup.md) 和可选只读 `scripts/doctor.py`。优先现有原生工具、Ego 或 Agent Browser；没有工具再走官方安装路径。提供 Windows/macOS/Linux 的接入说明；WorkBuddy Windows 宿主兼容已出现失败，不能把说明覆盖当作支持承诺。登录、客户端服务报错、页面读取异常分别处理，首次无需默认的多岗位校准报告。
-
-首次使用先确认本机实际可用的浏览器工具和登录页面，再核对推荐入口与当前筛选；不能先在无关列表里开发抓取程序。读取失败时按 [浏览器接入与有限恢复](packages/boss-apply-workbuddy/references/browser-session.md) 处理。任务运行中不生成另一个投递驱动，不靠修改 Cookie、接口补数或重复刷新继续。
-
-旧用户更新：下载到新目录，让原任务重新读取手册；私有条件保留并复核，不覆盖原工作区、不建立第二执行者。下载更新不会自动控制朋友的电脑。
-
-## 通用流程
-
-先按自己的推荐标签及薪资组合处理到底，再按自己的关键词搜索。每岗核实当前职位、JD、招聘者来源与硬条件，依据本人确认的评分规则判断；通过后只点一次“立即沟通”，必要关闭挡层后下一岗。不建立逐岗台账，不做历史去重或投后核验。
-
-满额只认平台当日明确提示，额度随平台和账号而异；不拿点击次数冒充成功数。登录、验证、风控需本人处理；用户暂停立即停止。
-
-- [Codex 执行手册](packages/boss-apply-codex/执行手册.md)
-- [WorkBuddy 执行手册](packages/boss-apply-workbuddy/执行手册.md)
-
-## 依赖与验证
-
-日常运行依赖客户端、其实际可用的浏览器工具及本人登录。没有必需的数据库、后台服务器、额外模型 API Key 或作者账号。Python 仅用于一行下载/配置检查；Codex 可选原生保护模块使用 Node.js 标准库。第三方客户端和浏览器本身不包含在本仓库。
-
-验收要求：客户端自行从 GitHub 下载，依据本人资料生成配置，按要求完成真实首次沟通；不能依赖作者补操作提示或手改测试配置，不以投满额度为必要条件。原 Codex/macOS 工作流和旧 WorkBuddy 会话的发送记录不代表当前公开包独立上手已通过。当前公开包完整独立上手及 Windows 实机仍未验收。[验证范围](docs/validation.md)。
-
-## 开发与开源
-
-MIT 许可。`python3 -m unittest discover -s tests -v`；`node --test tests/*.test.mjs`；`python3 tools/package.py`。下载包采用文件白名单。
-
-[贡献说明](CONTRIBUTING.md) · [隐私与发布](docs/releasing.md) · [来源](docs/provenance.md) · [许可证](LICENSE)
-
-整理依据：[GitHub README 说明](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes)、[GitHub Releases 说明](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases)、[开源项目指南](https://opensource.guide/zh-hans/starting-a-project/)。一句话下载是本项目提供的易用入口，不是 GitHub 的强制开源标准。
+[发布与隐私](docs/releasing.md) · [验证范围](docs/validation.md) · [贡献](CONTRIBUTING.md) · [许可证](LICENSE)

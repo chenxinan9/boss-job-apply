@@ -22,23 +22,12 @@
     "scripts/browser-session.mjs",
     "references/agent-browser.md"
   ],
-  "boss-apply-workbuddy": [
+  "boss-apply-workbuddy-macos": [
     "SKILL.md",
-    "README.md",
-    "执行手册.md",
-    "LICENSE",
-    ".gitignore",
-    "templates/policy.example.json",
-    "templates/resume.example.md",
-    "templates/schedule-prompt.md",
-    "scripts/check_policy.py",
-    "references/matching.md",
-    "docs/validation.md",
-    "references/workbuddy.md",
-    "references/browser-session.md",
-    "scripts/doctor.py",
-    "references/setup.md",
-    "scripts/browser-session.mjs",
-    "references/agent-browser.md"
+    "LICENSE"
+  ],
+  "boss-apply-workbuddy-windows": [
+    "SKILL.md",
+    "LICENSE"
   ]
 }

@@ -72,6 +72,8 @@ class DownloadTest(unittest.TestCase):
             if not p.exists():self.skipTest('run tools/package.py to validate generated ZIPs')
             self.assertEqual(hashlib.sha256(p.read_bytes()).hexdigest(),item['sha256'])
             dest=m.extract(p,self.root,client)
-            self.assertFalse((dest/'private').exists());self.assertTrue((dest/'执行手册.md').exists())
+            self.assertFalse((dest/'private').exists())
+            self.assertEqual({f.relative_to(dest).as_posix() for f in dest.rglob('*') if f.is_file()},
+                             set(json.loads((Path(__file__).resolve().parents[1]/'tools/package-manifest.json').read_text())['boss-apply-'+client]))
 
 if __name__=='__main__':unittest.main()

@@ -1,8 +1,12 @@
+# 当前发行范围
+
+v0.4.0-rc.1 只发布 manifest 中的 Codex 原包和 Windows/macOS 两个 WorkBuddy 原生候选。不得覆盖旧版本资产。必须预发行并保留未验收声明；完整实站通过后才能更新状态。
+
 # 发布与隐私
 
-从 packages/ 中明确列出的文件生成两个独立 ZIP。不要直接压缩个人工作区、应用数据目录或 Git 历史。tools/package.py 采用 allowlist，不递归收集 private/、聊天、截图、浏览器状态或日志。每个 ZIP 内含单一技能根目录与 SKILL.md，另输出 SHA256SUMS。
+从 packages/ 中明确列出的文件生成三个独立 ZIP。不要直接压缩个人工作区、应用数据目录或 Git 历史。tools/package.py 采用 allowlist，不递归收集 private/、聊天、截图、浏览器状态或日志。每个 ZIP 内含单一技能根目录与 SKILL.md，另输出 SHA256SUMS。
 
-发布前运行配置与单元检查、确认两套规则一致、审阅 `git diff --cached`、`git ls-files` 和 ZIP 文件清单。检查项包括私人目录、电话号码、邮箱、Cookie、真实简历、任务号、空间号、旧模拟材料和凭据。字符串扫描只能辅助，明确来源清单及人工检查才决定是否可公开。
+发布前运行配置与单元检查、确认两个 WorkBuddy 系统包的业务规则一致、审阅 `git diff --cached`、`git ls-files` 和 ZIP 文件清单。检查项包括私人目录、电话号码、邮箱、Cookie、真实简历、任务号、空间号、旧模拟材料和凭据。字符串扫描只能辅助，明确来源清单及人工检查才决定是否可公开。
 
 首次使用全新 Git 仓库，使用通用提交作者，避免历史提交暴露个人邮箱或旧文件。发布只包含当前审阅过的源码与生成包。后来添加自己的资料必须放 private/；gitignore 不会保护已经跟踪的文件，提交前仍需审阅。
 
