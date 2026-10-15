@@ -1,6 +1,9 @@
 # Download only: no MCP registration, permission changes, or desktop actions.
 $ErrorActionPreference = 'Stop'
 if ($env:OS -ne 'Windows_NT') { throw 'This package requires Windows.' }
+# Hosts may supply a module search path for a different PowerShell version.
+Import-Module (Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Utility')
+Import-Module (Join-Path $PSHOME 'Modules\Microsoft.PowerShell.Archive')
 $arch = [Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString()
 if ($arch -eq 'X64') { $arch = 'AMD64' }
 $hashes = @{
