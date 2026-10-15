@@ -37,8 +37,10 @@ class PrepareTest(unittest.TestCase):
             sha = hashlib.sha256(fixture.read_bytes()).hexdigest()
             folder = ROOT/'packages'/('boss-apply-workbuddy-macos' if mac else 'boss-apply-workbuddy-windows')
             original = (folder/('prepare-desktop.sh' if mac else 'prepare-desktop.ps1')).read_text(encoding='utf-8')
-            env = dict(os.environ, HOME=str(root), LOCALAPPDATA=str(root), FIXTURE=str(fixture),
-                       PROCESSOR_ARCHITECTURE='AMD64', PROCESSOR_ARCHITEW6432='')
+            env = dict(os.environ, HOME=str(root), LOCALAPPDATA=str(root), FIXTURE=str(fixture))
+            # Host environment variables are not a reliable CPU architecture source.
+            env.pop('PROCESSOR_ARCHITECTURE', None)
+            env.pop('PROCESSOR_ARCHITEW6432', None)
             if mac:
                 mocks = root/'bin'; mocks.mkdir()
                 # Mock download and signature only; real hash, extraction, JSON and no-overwrite checks.

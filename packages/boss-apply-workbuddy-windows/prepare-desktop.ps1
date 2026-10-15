@@ -1,7 +1,8 @@
 # Download only: no MCP registration, permission changes, or desktop actions.
 $ErrorActionPreference = 'Stop'
 if ($env:OS -ne 'Windows_NT') { throw 'This package requires Windows.' }
-$arch = if ($env:PROCESSOR_ARCHITEW6432) { $env:PROCESSOR_ARCHITEW6432 } else { $env:PROCESSOR_ARCHITECTURE }
+$arch = [Runtime.InteropServices.RuntimeInformation]::OSArchitecture.ToString()
+if ($arch -eq 'X64') { $arch = 'AMD64' }
 $hashes = @{
     AMD64 = '0ca3c940dc7d1467b70a0a6f95d04974120b5225d2f8174fdbc8df5099270acb'
     ARM64 = '723f37b8805ba03ab87b5d7305e06998f82a24cf64b44414a7578f9ddab0cea1'
