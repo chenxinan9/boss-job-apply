@@ -27,6 +27,12 @@ jobs:
       - run: python -m unittest discover -s tests -v
       - run: node --test tests/*.test.mjs
       - run: python packages/boss-apply-workbuddy/scripts/doctor.py --client workbuddy
+      - name: Prepare real native runtime (macOS, no UI or MCP launch)
+        if: runner.os == 'macOS'
+        run: bash packages/boss-apply-workbuddy-macos/prepare-desktop.sh
+      - name: Prepare real native runtime (Windows, no UI or MCP launch)
+        if: runner.os == 'Windows'
+        run: powershell -NoProfile -File packages/boss-apply-workbuddy-windows/prepare-desktop.ps1
       - name: Download published Codex package over HTTPS
         if: github.event_name == 'release'
         run: python tools/download_release.py --client codex --destination "${{ runner.temp }}/boss-download-codex"
