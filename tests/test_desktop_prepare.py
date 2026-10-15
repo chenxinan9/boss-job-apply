@@ -27,7 +27,7 @@ class PrepareTest(unittest.TestCase):
     @unittest.skipUnless(sys.platform in ('darwin', 'win32'), 'native preparation needs macOS or Windows')
     def test_prepare_and_bad_hash_and_existing_install(self):
         with tempfile.TemporaryDirectory() as temp:
-            root = Path(temp)/'测试 with spaces'; root.mkdir()
+            root = (Path(temp)/'测试 with spaces').resolve(); root.mkdir()
             fixture = root/'fixture.zip'
             mac = sys.platform == 'darwin'
             rel = 'Open Computer Use.app/Contents/MacOS/OpenComputerUse' if mac else 'open-computer-use.exe'
@@ -37,7 +37,7 @@ class PrepareTest(unittest.TestCase):
             sha = hashlib.sha256(fixture.read_bytes()).hexdigest()
             folder = ROOT/'packages'/('boss-apply-workbuddy-macos' if mac else 'boss-apply-workbuddy-windows')
             original = (folder/('prepare-desktop.sh' if mac else 'prepare-desktop.ps1')).read_text(encoding='utf-8')
-            env = dict(os.environ, HOME=str(root), LOCALAPPDATA=str(root), FIXTURE=str(fixture))
+            env = dict(os.environ, FIXTURE=str(fixture))
             # Host environment variables are not a reliable CPU architecture source.
             env.pop('PROCESSOR_ARCHITECTURE', None)
             env.pop('PROCESSOR_ARCHITEW6432', None)
@@ -50,23 +50,27 @@ class PrepareTest(unittest.TestCase):
                 }.items():
                     p = mocks/name; p.write_text('#!/bin/sh\n'+body+'\n'); p.chmod(0o755)
                 env['PATH'] = str(mocks)+os.pathsep+os.environ['PATH']
-                script = root/'prepare.sh'; command = ['bash', str(script)]
-                target = root/'Library/Application Support/boss-job-apply/computer-use/1.1.0'
+                script = root/'prepare.sh'; command = ['bash', str(script), str(root)]
                 old_hash = MAC_HASH
                 prefix = ''
             else:
-                script = root/'prepare.ps1'; command = ['powershell', '-NoProfile', '-File', str(script)]
-                target = root/'boss-job-apply/computer-use/1.1.0'
+                script = root/'prepare.ps1'; command = ['powershell', '-NoProfile', '-File', str(script), '-Workspace', str(root)]
                 old_hash = WIN_HASH
                 prefix = 'function Invoke-WebRequest { param($UseBasicParsing,$Uri,$OutFile,$TimeoutSec) Copy-Item -LiteralPath $env:FIXTURE -Destination $OutFile }\n'
                 # The mock switch must accept -UseBasicParsing like the real cmdlet.
                 prefix = prefix.replace('param($UseBasicParsing', 'param([switch]$UseBasicParsing')
             def run(text):
-                script.write_text(prefix+text, encoding='utf-8-sig' if not mac else 'utf-8')
+                text = text.replace('# Download only:', prefix+'# Download only:', 1)
+                script.write_text(text, encoding='utf-8-sig' if not mac else 'utf-8')
                 return subprocess.run(command, env=env, capture_output=True, timeout=30)
+            target = root/'.boss-runtime/computer-use/1.1.0'
             bad = run(original)
             self.assertNotEqual(bad.returncode, 0)
             self.assertFalse(target.exists(), bad.stdout)
+            # Missing workspace must fail before download and cannot fall back to a global directory.
+            missing = subprocess.run(command[:-1]+[str(root/'missing')], env=env, capture_output=True, timeout=30)
+            self.assertNotEqual(missing.returncode, 0)
+            self.assertFalse((root/'missing').exists())
             good_source = original.replace(old_hash, sha)
             good = run(good_source)
             self.assertEqual(good.returncode, 0, good.stderr)

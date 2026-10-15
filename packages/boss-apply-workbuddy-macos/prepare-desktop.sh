@@ -3,7 +3,9 @@
 set -euo pipefail
 [[ "$(uname -s)" == Darwin ]] || { echo 'This package requires macOS.' >&2; exit 1; }
 [[ "$(sw_vers -productVersion | cut -d. -f1)" -ge 14 ]] || { echo 'macOS 14+ required.' >&2; exit 1; }
-target="$HOME/Library/Application Support/boss-job-apply/computer-use/1.1.0"
+[[ $# -eq 1 && -d "$1" ]] || { echo 'Pass one existing, authorized persistent workspace directory.' >&2; exit 1; }
+workspace=$(cd -- "$1" && pwd -P)
+target="$workspace/.boss-runtime/computer-use/1.1.0"
 mkdir -p "$(dirname "$target")"
 [[ ! -e "$target" && ! -L "$target" ]] || { echo "Already exists; preserve it and inspect: $target" >&2; exit 1; }
 stage=$(mktemp -d "$(dirname "$target")/.prepare.XXXXXX")

@@ -1,17 +1,17 @@
 # 下载和更新
 
-当前固定候选为 v0.4.0-rc.2；未验收，不用 releases/latest 代替。日常使用只需下载 ZIP、核对 SHA256SUMS 后用系统解压，再让客户端读取 SKILL.md。入口见 [README](../README.md)。下载不等于注册技能、授予电脑权限或启动投递。
+当前固定候选为 v0.4.0-rc.3；未验收，不用 releases/latest 代替。日常使用只需下载 ZIP、核对 SHA256SUMS 后用系统解压，再让客户端读取 SKILL.md。入口见 [README](../README.md)。下载不等于注册技能、授予电脑权限或启动投递。
 
 有 Python 3.10+ 时，可用原有标准库下载器一行校验并解包。目标目录存在会停止，绝不覆盖个人资料。
 
 macOS WorkBuddy：
 ```sh
-curl --fail --location --connect-timeout 10 --max-time 60 --proto '=https' --proto-redir '=https' https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.4.0-rc.2/tools/download_release.py -o boss-skill-install.py && python3 boss-skill-install.py --client workbuddy-macos
+curl --fail --location --connect-timeout 10 --max-time 60 --proto '=https' --proto-redir '=https' https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.4.0-rc.3/tools/download_release.py -o boss-skill-install.py && python3 boss-skill-install.py --client workbuddy-macos
 ```
 
 Windows PowerShell WorkBuddy：
 ```powershell
-& { $ErrorActionPreference='Stop'; Invoke-WebRequest 'https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.4.0-rc.2/tools/download_release.py' -OutFile 'boss-skill-install.py' -TimeoutSec 60; py -3 boss-skill-install.py --client workbuddy-windows }
+& { $ErrorActionPreference='Stop'; Invoke-WebRequest 'https://raw.githubusercontent.com/chenxinan9/boss-job-apply/v0.4.0-rc.3/tools/download_release.py' -OutFile 'boss-skill-install.py' -TimeoutSec 60; py -3 boss-skill-install.py --client workbuddy-windows }
 ```
 
 Codex 使用同一下载器，把 `--client` 的值换成 `codex`。Windows 命令未实机验证；没有 Python 就使用 ZIP，不为下载技能强制安装运行环境。

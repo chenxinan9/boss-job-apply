@@ -1,3 +1,4 @@
+param([string]$Workspace)
 # Download only: no MCP registration, permission changes, or desktop actions.
 $ErrorActionPreference = 'Stop'
 if ($env:OS -ne 'Windows_NT') { throw 'This package requires Windows.' }
@@ -11,8 +12,10 @@ $hashes = @{
     ARM64 = '723f37b8805ba03ab87b5d7305e06998f82a24cf64b44414a7578f9ddab0cea1'
 }
 if (-not $hashes.ContainsKey($arch)) { throw "Unsupported Windows architecture: $arch" }
-if (-not $env:LOCALAPPDATA) { throw 'LOCALAPPDATA is missing.' }
-$target = Join-Path $env:LOCALAPPDATA 'boss-job-apply\computer-use\1.1.0'
+if (-not $Workspace -or -not (Test-Path -LiteralPath $Workspace -PathType Container)) {
+    throw 'Pass one existing, authorized persistent workspace directory with -Workspace.'
+}
+$target = Join-Path (Resolve-Path -LiteralPath $Workspace).Path '.boss-runtime\computer-use\1.1.0'
 if (Test-Path -LiteralPath $target) { throw "Already exists; preserve it and inspect: $target" }
 New-Item -ItemType Directory -Path (Split-Path $target) -Force | Out-Null
 $stage = Join-Path (Split-Path $target) ('.prepare-' + [guid]::NewGuid())
