@@ -74,6 +74,6 @@ class DownloadTest(unittest.TestCase):
             dest=m.extract(p,self.root,client)
             self.assertFalse((dest/'private').exists())
             self.assertEqual({f.relative_to(dest).as_posix() for f in dest.rglob('*') if f.is_file()},
-                             set(json.loads((Path(__file__).resolve().parents[1]/'tools/package-manifest.json').read_text())['boss-apply-'+client]))
+                             set(json.loads((Path(__file__).resolve().parents[1]/'tools/package-manifest.json').read_text(encoding='utf-8'))['boss-apply-'+client]))
 
 if __name__=='__main__':unittest.main()
