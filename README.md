@@ -2,27 +2,27 @@
 
 用自己的简历和求职条件，让客户端逐岗判断并首次沟通。MIT 开源，个人资料留在本地。
 
-**当前：v0.4.0-rc.4 开发预发行，尚未通过 WorkBuddy 独立真实发送与持续投递验收，暂不能作为交付给非技术朋友的可用版本。** 安装、静态检查不算投递成功。本候选改为优先使用 WorkBuddy 官方自带电脑操控，删除默认第三方准备步骤；当前本机官方入口可见性与任务能力仍待接通，Windows 尚缺实机验证。见[证据与验收](docs/workbuddy-desktop-scope.md)。
+**当前：v0.4.0-rc.5 开发预发行，尚未通过 WorkBuddy 独立真实发送与持续投递验收，暂不能作为交付给非技术朋友的可用版本。** 安装、静态检查不算投递成功。本候选补齐官方套件正常安装入口、任务接口的持续推进，以及列表加载和自动跳转恢复。macOS 宿主已正常安装官方组件且显示10个工具启用，尚不等于本包实投通过；Windows 尚缺实机验证。见[证据与验收](docs/workbuddy-desktop-scope.md)。
 
 ## WorkBuddy：一句话下载并执行
 
 把下面一句话发给自己的 WorkBuddy，Windows 和 macOS 通用：
 
 ```text
-请从 https://github.com/chenxinan9/boss-job-apply/releases/tag/v0.4.0-rc.4 下载匹配当前系统的 WorkBuddy ZIP（Windows 选 workbuddy-windows，Mac 选 workbuddy-macos），核对该页 SHA256SUMS 后解压并读取 SKILL.md；保留我已有的简历、求职需求与确认条件，用电脑界面操作系统已有浏览器，不安装浏览器、不创建定时；按 DESKTOP.md 核对官方自带电脑操控及当前任务实际工具，必要官方启用和权限由本人确认，不自动添加第三方连接器，按包自主执行，缺失资料只问缺项；我已授权的投递直接继续，未授权则只审核，真实阻断如实报告。
+请从 https://github.com/chenxinan9/boss-job-apply/releases/tag/v0.4.0-rc.5 下载匹配当前系统的 WorkBuddy ZIP（Windows 选 workbuddy-windows，Mac 选 workbuddy-macos），核对该页 SHA256SUMS 后解压并读取 SKILL.md；保留我已有的简历、求职需求与确认条件，用电脑界面操作系统已有浏览器，不安装浏览器、不创建定时；按 DESKTOP.md 核对官方自带电脑操控及当前任务实际工具，必要官方启用和权限由本人确认，不自动添加第三方连接器，按包自主执行，缺失资料只问缺项；我已授权的投递直接继续，未授权则只审核，真实阻断如实报告。
 ```
 
 | 下载 | 操作方式 | 包内文件 |
 |---|---|---|
-| [Windows WorkBuddy ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.4.0-rc.4/boss-apply-workbuddy-windows-0.4.0-rc.4.zip) | 电脑界面操作系统 Edge | 技能、官方能力说明、LICENSE |
-| [macOS WorkBuddy ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.4.0-rc.4/boss-apply-workbuddy-macos-0.4.0-rc.4.zip) | 电脑界面操作系统 Safari | 技能、官方能力说明、LICENSE |
-| [Codex ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.4.0-rc.4/boss-apply-codex-0.4.0-rc.4.zip) | 保留原 Codex 包，读取其 SKILL.md | 原有文件未改 |
+| [Windows WorkBuddy ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.4.0-rc.5/boss-apply-workbuddy-windows-0.4.0-rc.5.zip) | 电脑界面操作系统 Edge | 技能、官方能力说明、LICENSE |
+| [macOS WorkBuddy ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.4.0-rc.5/boss-apply-workbuddy-macos-0.4.0-rc.5.zip) | 电脑界面操作系统 Safari | 技能、官方能力说明、LICENSE |
+| [Codex ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.4.0-rc.5/boss-apply-codex-0.4.0-rc.5.zip) | 保留原 Codex 包，读取其 SKILL.md | 原有文件未改 |
 
-[校验值 SHA256SUMS](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.4.0-rc.4/SHA256SUMS) · [命令下载与更新](docs/install.md)。ZIP 可用系统自带解压功能；不需要安装 Python、Node、额外浏览器或数据库。需要当前 WorkBuddy 实际开放电脑操控并由本人完成必要权限；不强制安装第三方程序，不把下载完成视为接通。
+[校验值 SHA256SUMS](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.4.0-rc.5/SHA256SUMS) · [命令下载与更新](docs/install.md)。ZIP 可用系统自带解压功能；不需要安装 Python、Node、额外浏览器或数据库。需要当前 WorkBuddy 实际开放电脑操控并由本人完成必要权限；不强制安装第三方程序，不把下载完成视为接通。
 
 给 Codex 的一句话：
 ```text
-请从 https://github.com/chenxinan9/boss-job-apply/releases/tag/v0.4.0-rc.4 下载 Codex ZIP，校验后读取 SKILL.md，保留我已有简历与求职条件，依包执行；未获得投递授权时仅审核，不创建定时。
+请从 https://github.com/chenxinan9/boss-job-apply/releases/tag/v0.4.0-rc.5 下载 Codex ZIP，校验后读取 SKILL.md，保留我已有简历与求职条件，依包执行；未获得投递授权时仅审核，不创建定时。
 ```
 
 ## 运行原则
