@@ -2,6 +2,8 @@
 
 当前固定候选为 v0.4.0-rc.5；未验收，不用 releases/latest 代替。日常使用只需下载 ZIP、核对 SHA256SUMS 后用系统解压，再让客户端读取 SKILL.md。入口见 [README](../README.md)。下载不等于注册技能、授予电脑权限或启动投递。
 
+macOS 的辅助功能与录屏授权对象是腾讯官方独立程序 `WorkBuddy Computer Use`，仅开启 `WorkBuddy` 本体不足。系统认证及最终权限由本人正常确认；不提供密码、不修改 TCC 或隐藏配置。
+
 有 Python 3.10+ 时，可用原有标准库下载器一行校验并解包。目标目录存在会停止，绝不覆盖个人资料。
 
 macOS WorkBuddy：
