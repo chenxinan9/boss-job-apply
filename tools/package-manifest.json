@@ -25,13 +25,11 @@
   "boss-apply-workbuddy-macos": [
     "SKILL.md",
     "LICENSE",
-    "DESKTOP.md",
-    "prepare-desktop.sh"
+    "DESKTOP.md"
   ],
   "boss-apply-workbuddy-windows": [
     "SKILL.md",
     "LICENSE",
-    "DESKTOP.md",
-    "prepare-desktop.ps1"
+    "DESKTOP.md"
   ]
 }
