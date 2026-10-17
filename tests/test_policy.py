@@ -66,15 +66,10 @@ class PolicyTest(unittest.TestCase):
         self.p['per_job_records']=True
         with self.assertRaises(ValueError):self.validate(self.p)
     def test_client_specific_skill_metadata(self):
-        for client in ('codex','workbuddy'):
+        for client in ('codex','workbuddy-macos','workbuddy-windows'):
             header=(PACKAGES/('boss-apply-'+client)/'SKILL.md').read_text(encoding='utf-8').split('---',2)[1]
-            for key in (['name','description'] if client=='codex' else ['name','description','description_zh','description_en','version','author']):
+            for key in ('name','description'):
                 self.assertIn('\n'+key+':',header)
-    def test_editions_match(self):
-        a=PACKAGES/'boss-apply-codex';b=PACKAGES/'boss-apply-workbuddy'
-        for name in ['templates/policy.example.json','templates/resume.example.md','templates/schedule-prompt.md','scripts/check_policy.py','references/matching.md','references/browser-session.md','docs/validation.md']:
-            self.assertEqual((a/name).read_bytes(),(b/name).read_bytes(),name)
-        self.assertEqual((a/'执行手册.md').read_text(encoding='utf-8').split('## 读取与边界',1)[1],(b/'执行手册.md').read_text(encoding='utf-8').split('## 读取与边界',1)[1])
     def test_additional_requirements_validate_evidence(self):
         p=self.ready();p['additional_requirements']=[{'name':'附加条件','condition':'满足本人条件','visible_evidence':'当前页面字段','unknown_action':'SKIP'}]
         self.assertTrue(self.validate(p))

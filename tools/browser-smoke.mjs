@@ -12,7 +12,7 @@ import { randomUUID } from 'node:crypto';
 
 const exec = promisify(execFile);
 const cli = resolve(process.argv[2]);
-const adapter = process.argv[3] ? resolve(process.argv[3]) : fileURLToPath(new URL('../packages/boss-apply-workbuddy/scripts/browser-session.mjs', import.meta.url));
+const adapter = process.argv[3] ? resolve(process.argv[3]) : fileURLToPath(new URL('../packages/boss-apply-codex/scripts/browser-session.mjs', import.meta.url));
 const cwd = realpathSync(mkdtempSync(resolve(tmpdir(), 'browser-continuity-')));
 const env = Object.fromEntries(Object.entries(process.env).filter(([k]) => !k.startsWith('AGENT_BROWSER_')));
 const run = async args => (await exec(process.execPath, args, { cwd, env, timeout: 60000, maxBuffer: 8 * 1024 * 1024 })).stdout.trim();

@@ -95,10 +95,5 @@ class EnvironmentTest(unittest.TestCase):
         self.assertEqual(result.returncode,0,result.stderr)
         self.assertEqual(json.loads(result.stdout)['status'],'DRAFT')
 
-    def test_client_copies_identical(self):
-        for name in ('scripts/doctor.py', 'references/setup.md'):
-            self.assertEqual((ROOT/'packages/boss-apply-codex'/name).read_bytes(),
-                             (ROOT/'packages/boss-apply-workbuddy'/name).read_bytes())
-
 if __name__ == '__main__':
     unittest.main()

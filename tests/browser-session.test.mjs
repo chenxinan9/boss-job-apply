@@ -5,9 +5,9 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
-import { commandPrefix, validateCommand } from '../packages/boss-apply-workbuddy/scripts/browser-session.mjs';
+import { commandPrefix, validateCommand } from '../packages/boss-apply-codex/scripts/browser-session.mjs';
 
-const script = fileURLToPath(new URL('../packages/boss-apply-workbuddy/scripts/browser-session.mjs', import.meta.url));
+const script = fileURLToPath(new URL('../packages/boss-apply-codex/scripts/browser-session.mjs', import.meta.url));
 const env = Object.fromEntries(Object.entries(process.env).filter(([k]) => !k.startsWith('AGENT_BROWSER_')));
 // Unit-test subprocess double only. This never counts as browser or BOSS acceptance.
 const fake = `import fs from 'node:fs';
@@ -57,8 +57,4 @@ test('changed configuration or tool version stops before browser action', t => {
   const c=JSON.parse(readFileSync(p));c._adapter.version='agent-browser 0.1.0';writeFileSync(p,JSON.stringify(c));
   assert.equal(f.run('start').status,1);
   c._adapter.version='agent-browser 0.27.0';c.headed=false;writeFileSync(p,JSON.stringify(c));assert.equal(f.run('start').status,1);
-});
-test('both standalone packages use the identical adapter', () => {
-  const other=fileURLToPath(new URL('../packages/boss-apply-codex/scripts/browser-session.mjs',import.meta.url));
-  assert.equal(readFileSync(script,'utf8'),readFileSync(other,'utf8'));
 });

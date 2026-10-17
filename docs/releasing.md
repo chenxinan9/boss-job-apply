@@ -1,6 +1,6 @@
 # 当前发行范围
 
-v0.4.0-rc.5 只发布 manifest 中的 Codex 原包和 Windows/macOS 两个 WorkBuddy 原生候选。不得覆盖旧版本资产。必须预发行并保留未验收声明；完整实站通过后才能更新状态。
+v0.4.0-rc.6 只发布 manifest 中的 Codex 包和 Windows/macOS 两个 WorkBuddy 浏览器控制候选。不得覆盖旧版本资产。必须预发行并保留未验收声明；完整实站通过后才能更新状态。
 
 # 发布与隐私
 

@@ -1,42 +1,40 @@
 # BOSS Job Apply
 
-用自己的简历和求职条件，让客户端逐岗判断并首次沟通。MIT 开源，个人资料留在本地。
+使用自己的简历与求职要求，先处理BOSS站内推荐，再在站内搜索，逐岗判断后单次首次沟通。MIT开源；简历和私有配置不随技能发布，客户端自身的数据处理不由本项目替代。
 
-**当前：v0.4.0-rc.5 开发预发行，尚未通过 WorkBuddy 独立真实发送与持续投递验收，暂不能作为交付给非技术朋友的可用版本。** 安装、静态检查不算投递成功。本候选补齐官方套件正常安装入口、任务接口的持续推进，以及列表加载和自动跳转恢复。macOS 本轮已自主下载并调用官方权限工具，当前独立组件尚需本人授予辅助功能和录屏，真实发送0；Windows 尚缺实机验证。见[证据与验收](docs/workbuddy-desktop-scope.md)。
+**当前v0.4.0-rc.6为开发候选，WorkBuddy尚未通过本版独立真实发送与持续投递验收，Windows未实机验证。** 不把下载、工具连接或CI当作投递成功；旧包不要继续使用，历史记录仅供追溯。
 
-本项目不录制视频。当前 WorkBuddy 官方电脑代理通过即时截图识别和操作界面，macOS 将该截图能力归入“屏幕录制”权限；这不是投递业务要求录屏。Codex 已验证路径以界面控件文字和点击为主，不能据此认定两端接入相同，或 WorkBuddy 获得权限后就一定能投递成功。具体区别见[接入范围](docs/workbuddy-desktop-scope.md)。
-
-## WorkBuddy：一句话下载并执行
-
-把下面一句话发给自己的 WorkBuddy，Windows 和 macOS 通用：
+## 一句话给WorkBuddy
 
 ```text
-请从 https://github.com/chenxinan9/boss-job-apply/releases/tag/v0.4.0-rc.5 下载匹配当前系统的 WorkBuddy ZIP（Windows 选 workbuddy-windows，Mac 选 workbuddy-macos），核对该页 SHA256SUMS 后解压并读取 SKILL.md；保留我已有的简历、求职需求与确认条件，用电脑界面操作系统已有浏览器，不安装浏览器、不创建定时；按 DESKTOP.md 核对官方自带电脑操控及当前任务实际工具，必要官方启用和权限由本人确认，不自动添加第三方连接器，按包自主执行，缺失资料只问缺项；我已授权的投递直接继续，未授权则只审核，真实阻断如实报告。
+请从 https://github.com/chenxinan9/boss-job-apply/releases/tag/v0.4.0-rc.6 下载符合本机系统的WorkBuddy ZIP，核对SHA256SUMS并读取SKILL.md和BROWSER.md；保留我已有简历与确认条件，直接使用WorkBuddy自带浏览器控制。先从我提供的浏览器截图及实际标签确定目标，未登录时告诉我在同一BOSS网页登录并提供含标题栏的截图，已有可靠登录证据不重复要求。先完成推荐组合，再只在BOSS页面“搜索职位、公司”内搜索，不用外部搜索引擎或反复改地址栏，不安装新浏览器、电脑GUI代理或第三方驱动，不创建定时。我已有的投递授权继续有效，未授权仅审核，真实阻断如实报告。
 ```
 
-| 下载 | 操作方式 | 包内文件 |
+| 下载 | 本人浏览器与工具 | 包内文件 |
 |---|---|---|
-| [Windows WorkBuddy ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.4.0-rc.5/boss-apply-workbuddy-windows-0.4.0-rc.5.zip) | 电脑界面操作系统 Edge | 技能、官方能力说明、LICENSE |
-| [macOS WorkBuddy ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.4.0-rc.5/boss-apply-workbuddy-macos-0.4.0-rc.5.zip) | 电脑界面操作系统 Safari | 技能、官方能力说明、LICENSE |
-| [Codex ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.4.0-rc.5/boss-apply-codex-0.4.0-rc.5.zip) | 保留原 Codex 包，读取其 SKILL.md | 原有文件未改 |
+| [Windows WorkBuddy ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.4.0-rc.6/boss-apply-workbuddy-windows-0.4.0-rc.6.zip) | 识别本人实际浏览器，连接WorkBuddy官方浏览器控制 | SKILL.md、BROWSER.md、LICENSE |
+| [macOS WorkBuddy ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.4.0-rc.6/boss-apply-workbuddy-macos-0.4.0-rc.6.zip) | 同上；不再强制改用Safari | 同上 |
+| [Codex ZIP](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.4.0-rc.6/boss-apply-codex-0.4.0-rc.6.zip) | 保留既有原生优先路径，新增明确站内搜索约束 | 手册、模板及原有可选辅助代码 |
 
-[校验值 SHA256SUMS](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.4.0-rc.5/SHA256SUMS) · [命令下载与更新](docs/install.md)。ZIP 可用系统自带解压功能；不需要安装 Python、Node、额外浏览器或数据库。需要当前 WorkBuddy 实际开放电脑操控并由本人完成必要权限；不强制安装第三方程序，不把下载完成视为接通。
+[SHA256SUMS](https://github.com/chenxinan9/boss-job-apply/releases/download/v0.4.0-rc.6/SHA256SUMS) · [下载和更新](docs/install.md) · [实际验证范围](docs/workbuddy-browser-scope.md)。WorkBuddy系统包用系统解压即可，不依赖Python、Node或数据库。缺少官方浏览器能力或扩展时，通过当前WorkBuddy正常入口补齐，新增权限本人确认。当前设置有Chrome、Edge、QQ浏览器入口；Safari接入未验证，不承诺所有系统自带浏览器都能受控，不暗中换浏览器。
 
-给 Codex 的一句话：
+给Codex：
 ```text
-请从 https://github.com/chenxinan9/boss-job-apply/releases/tag/v0.4.0-rc.5 下载 Codex ZIP，校验后读取 SKILL.md，保留我已有简历与求职条件，依包执行；未获得投递授权时仅审核，不创建定时。
+请从 https://github.com/chenxinan9/boss-job-apply/releases/tag/v0.4.0-rc.6 下载Codex ZIP，校验并读取SKILL.md，保留我已有简历和条件，按现有原生工具执行；先推荐后BOSS站内搜索，不用地址栏或外部搜索引擎找岗位，未获投递授权仅审核，不创建定时。
 ```
 
-## 运行原则
+## 执行边界
 
-模型理解当前画面、JD 和本人经历，自主判断下一步。按本人推荐入口与薪资组合处理到底，再关键词搜索；核实当前岗位合格后，单次立即沟通，必要收起挡层后下一岗。不做逐岗台账、历史去重或投后核验。本人条件不会随技能更新或换简历改变。
+本项目没有视频录制任务，不把桌面录屏权限设为浏览器控制的统一前提。同一账号只允许一个实际投递者；登录、验证、新增权限由本人正常处理。使用者截图帮助识别浏览器，工具还必须读取同一标签核对；截图本身不证明已连接或已登录。
 
-真实登录、验证、权限交给本人处理；同一账号仅一个执行者。首次成功、持续执行、当日满额分别验收，点击数不冒充成功数。未通过电脑操作能力检查，不另造浏览器驱动兜底。
+主模型读取当前完整JD与本人经历判断，合格后单次“立即沟通”，必要收起挡层后下一岗。不投后核验、不历史去重、不逐岗记账，不重试已派发或结果不明的岗位。首次真实发送、持续执行、当天平台满额分别验收；平台额度按账号实际提示，不保证所有人都是150。
 
-旧 WorkBuddy 浏览器方案保留在历史版本与源码中用于追溯，已退出本次发行清单。新版不读取旧技能的执行说明，个人材料仍可原样保留。完整独立验收前，不把本候选标记为稳定版。
+更新包不改变简历、条件或日程。公开包不会安装到维护者生产Codex、启动其worker或改其配置；下载器仅下载校验解包，不注册技能、创建日程或投递。
 
-## 开发
+## 开发与历史
 
-`python3 tools/package.py` → `python3 -m unittest discover -s tests -v`；旧浏览器代码回归用 `node --test tests/*.test.mjs`。新 WorkBuddy 包各只白名单收录三个文件，实站另行验收。历史第三方准备脚本保留在源码供追溯，不进入本候选或自动执行。
+`python3 tools/package.py`，再运行`python3 -m unittest discover -s tests -v`及`node --test tests/*.test.mjs`。Codex可选浏览器代码测试不代表WorkBuddy原生浏览器控制验收。
 
-[发布与隐私](docs/releasing.md) · [验证范围](docs/validation.md) · [贡献](CONTRIBUTING.md) · [许可证](LICENSE)
+旧WorkBuddy驱动和第三方准备脚本已退出当前源码入口，可从Git历史恢复；有效旧审计记录收在[docs/history](docs/history)，不作为运行说明。发布保持预发行，未通过独立实站前不交给非技术使用者试错。
+
+[发布与隐私](docs/releasing.md) · [验证范围](docs/validation.md) · [许可证](LICENSE)

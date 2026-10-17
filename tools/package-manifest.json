@@ -25,11 +25,11 @@
   "boss-apply-workbuddy-macos": [
     "SKILL.md",
     "LICENSE",
-    "DESKTOP.md"
+    "BROWSER.md"
   ],
   "boss-apply-workbuddy-windows": [
     "SKILL.md",
     "LICENSE",
-    "DESKTOP.md"
+    "BROWSER.md"
   ]
 }
