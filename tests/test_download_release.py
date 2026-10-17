@@ -62,10 +62,14 @@ class DownloadTest(unittest.TestCase):
         self.assertEqual([p.name for p in dest.iterdir()],['keep'])
     def test_success_message_with_legacy_console_encoding(self):
         raw=io.BytesIO();console=io.TextIOWrapper(raw,encoding='cp1252')
-        with patch.object(m.sys,'stdout',console),patch.object(m.sys,'argv',['download_release.py','--client','codex']),patch.object(m,'install',return_value={'sha256':'0'*64}):
+        with patch.object(m.sys,'stdout',console),patch.object(m.sys,'argv',['download_release.py','--client','codex']),patch.object(m,'install',return_value={'sha256':'0'*64}),patch.object(m,'RELEASE_AVAILABLE',True):
             m.main()
         console.flush()
         self.assertIn('已校验并下载',raw.getvalue().decode('utf-8'))
+    def test_withdrawn_cli_never_downloads(self):
+        with patch.object(m.sys,'argv',['download_release.py','--client','codex']),patch.object(m,'install') as install,patch.object(m.sys,'stderr',io.StringIO()):
+            with self.assertRaises(SystemExit) as stopped:m.main()
+        self.assertEqual(stopped.exception.code,1);install.assert_not_called()
     def test_real_packaged_files_checksum_and_extract(self):
         for client,item in m.ARCHIVES.items():
             p=Path(__file__).resolve().parents[1]/'dist'/item['name']

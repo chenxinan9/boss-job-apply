@@ -67,7 +67,7 @@ def validate(p):
     if p.get('per_job_records') is not True: raise ValueError('per_job_records 须为true，仅记录已派发动作，不核验成功或用于去重')
     if p.get('completion')!='CURRENT_PLATFORM_DAILY_CAP': raise ValueError('完成依据须为平台当前满额提示')
     required={'requirements_confirmed':p['requirements_confirmed'], 'search.city':s['city'].strip(),
-              **{'search.'+k:s[k] for k in ('recommendation_tabs','salary_bands','keywords')},
+              **{'search.'+k:s[k] for k in ('recommendation_tabs','salary_bands')},
               'allowed_recruiter_types':p['allowed_recruiter_types'], 'allowed_scope':p['allowed_scope'],
               'scoring.dimensions':dims, 'scoring.default.threshold':scoring['default']['threshold'] is not None}
     missing=[key for key,value in required.items() if not value]

@@ -41,6 +41,9 @@ class PolicyTest(unittest.TestCase):
         with self.assertRaises(ValueError):self.validate(self.p)
     def test_ready_user_config_valid(self):
         p=self.ready();p['mode']='apply';self.assertTrue(self.validate(p))
+    def test_recommendations_can_start_without_fallback_keywords(self):
+        p=self.ready();p['mode']='apply';p['search']['keywords']=[]
+        self.assertTrue(self.validate(p))
     def test_any_user_defined_dimensions_supported(self):
         p=self.ready();p['scoring']['dimensions']=[{'id':'custom','label':'自定义维度','criterion':'自定义判断依据','max_score':100}]
         self.assertTrue(self.validate(p))

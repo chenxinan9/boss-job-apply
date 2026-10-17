@@ -12,10 +12,6 @@
     "references/matching.md",
     "docs/validation.md",
     "references/codex.md",
-    "optional/native-guard/fresh-ui.mjs",
-    "optional/native-guard/control-signals.mjs",
-    "optional/native-guard/control-signals.json",
-    "optional/native-guard/README.md",
     "references/browser-session.md",
     "references/setup.md"
   ],

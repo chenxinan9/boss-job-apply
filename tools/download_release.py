@@ -13,9 +13,10 @@ import urllib.parse
 import urllib.request
 import zipfile
 
-VERSION='v0.4.0-rc.8'
+VERSION='v0.4.0-rc.9'
 REPOSITORY='https://github.com/chenxinan9/boss-job-apply'
-ARCHIVES={'codex': {'name': 'boss-apply-codex-0.4.0-rc.8.zip', 'sha256': '8a5caa687764cb12c51867632e6ee571d3925895bddb97ced233c69478601d27'}, 'workbuddy-macos': {'name': 'boss-apply-workbuddy-macos-0.4.0-rc.8.zip', 'sha256': '48e168674f894c22d25c7e3f39f9ae011929659b9dcf5ab9c80d29aaed47961c'}, 'workbuddy-windows': {'name': 'boss-apply-workbuddy-windows-0.4.0-rc.8.zip', 'sha256': '7ea4844cfd9957a2d6eb7ae4ae0e0487ae323d4b32c1188ee83b9d1f1a3b95ae'}}
+RELEASE_AVAILABLE=False  # Re-enable only after independent live acceptance.
+ARCHIVES={'codex': {'name': 'boss-apply-codex-0.4.0-rc.9.zip', 'sha256': '50d71dc2abcc68193daeb5d1d1272a20a3067c68aab2c6bff18ad637813dec8e'}, 'workbuddy-macos': {'name': 'boss-apply-workbuddy-macos-0.4.0-rc.9.zip', 'sha256': 'a0af7fcffb9df2f65d63b371526875b17a57381c89c93198e3f6807ec7a9b73c'}, 'workbuddy-windows': {'name': 'boss-apply-workbuddy-windows-0.4.0-rc.9.zip', 'sha256': '7c1d38547c41446e2b3c999c3e98a733d7ab76d4d2ff2f7ab486dfc5e2da532a'}}
 MAX_DOWNLOAD=10*1024*1024
 MAX_UNPACKED=30*1024*1024
 
@@ -94,6 +95,7 @@ def main():
     parser.add_argument('--client',required=True,choices=tuple(ARCHIVES))
     parser.add_argument('--destination',type=Path)
     args=parser.parse_args();dest=args.destination or Path.cwd()/('boss-apply-'+args.client)
+    if not RELEASE_AVAILABLE: parser.exit(1,'当前没有通过独立实站验收的公开安装包，下载已暂停；请勿使用旧包。\n')
     try:receipt=install(args.client,dest)
     except (ValueError,OSError,RuntimeError,zipfile.BadZipFile) as e:parser.exit(1,'下载未完成：'+str(e)+'\n')
     print('已校验并下载 '+VERSION+'：'+str(dest.absolute()))
