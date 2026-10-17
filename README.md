@@ -2,7 +2,7 @@
 
 按本人简历和求职要求，在本人已打开、已登录的BOSS页面逐岗判断，单次立即沟通、留页并记录派发。先完成推荐城市薪资组合，再BOSS站内搜索。MIT开源。
 
-**稳定版交付暂停：没有通过独立实站验收的通用安装包。旧发行包已下架；仅提供明确标注的v0.4.0-rc.10预发行候选，供本人授权测试，不能称为已跑通产品。** 本机Codex的历史成功不证明GitHub包、WorkBuddy或Windows已经跑通。
+**稳定版交付暂停：没有通过独立实站验收的通用安装包。旧发行包已下架；仅提供明确标注的v0.4.0-rc.11预发行候选，供本人授权测试，不能称为已跑通产品。** 本机Codex的历史成功不证明GitHub包、WorkBuddy或Windows已经跑通。
 
 [候选下载与保留本人资料的用法](docs/install.md)
 
@@ -14,7 +14,7 @@
 | WorkBuddy macOS | packages/boss-apply-workbuddy-macos/SKILL.md | SKILL.md、BROWSER.md、LICENSE |
 | WorkBuddy Windows | packages/boss-apply-workbuddy-windows/SKILL.md | 同上；未实机验收 |
 
-这些是v0.4.0-rc.10测试候选，不是已验证安装包。不安装独立浏览器、电脑代理、数据库、驱动或Node运行环境。实际操作只用客户端文档支持的现有工具。
+这些是v0.4.0-rc.11测试候选，不是已验证安装包。不安装独立浏览器、电脑代理、数据库、驱动或Node运行环境。实际操作只用客户端文档支持的现有工具。
 
 ## 引导与执行
 

@@ -46,6 +46,23 @@ class DownloadTest(unittest.TestCase):
             opener.return_value.open.return_value=Response(b'large')
             with patch.object(m,'MAX_DOWNLOAD',2):
                 with self.assertRaises(ValueError):m.download('codex',self.root/'large.zip')
+    def test_official_api_fallback_keeps_asset_and_hash(self):
+        raw=self.archive().read_bytes();sha=hashlib.sha256(raw).hexdigest()
+        metadata=json.dumps({'assets':[{'id':7,'name':'test.zip','url':'https://untrusted.invalid/ignored'}]}).encode()
+        with patch.dict(m.ARCHIVES,{'codex':{'name':'test.zip','sha256':sha}}),patch.object(m.urllib.request,'build_opener') as opener:
+            opener.return_value.open.side_effect=[m.urllib.error.URLError('connection closed'),Response(metadata),Response(raw)]
+            receipt=m.download('codex',self.root/'fallback.zip')
+            self.assertEqual(receipt['sha256'],sha)
+            self.assertEqual(receipt['url'],'https://api.github.com/repos/chenxinan9/boss-job-apply/releases/assets/7')
+            self.assertEqual(opener.return_value.open.call_args.args[0].get_header('Accept'),'application/octet-stream')
+
+    def test_api_fallback_rejects_ambiguous_asset(self):
+        metadata=json.dumps({'assets':[{'id':7,'name':'test.zip'},{'id':8,'name':'test.zip'}]}).encode()
+        with patch.dict(m.ARCHIVES,{'codex':{'name':'test.zip','sha256':'0'*64}}),patch.object(m.urllib.request,'build_opener') as opener:
+            opener.return_value.open.side_effect=[m.urllib.error.URLError('connection closed'),Response(metadata)]
+            with self.assertRaisesRegex(ValueError,'唯一同名附件'):m.download('codex',self.root/'ambiguous.zip')
+        self.assertFalse((self.root/'ambiguous.zip').exists())
+
     def test_https_downgrade_rejected(self):
         with self.assertRaises(ValueError):m.HTTPSRedirect().redirect_request(None,None,302,'',{},'http://example.org/a')
     def test_complete_download_only(self):

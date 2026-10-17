@@ -9,14 +9,15 @@ import stat
 import sys
 import tempfile
 import unicodedata
+import urllib.error
 import urllib.parse
 import urllib.request
 import zipfile
 
-VERSION='v0.4.0-rc.10'
+VERSION='v0.4.0-rc.11'
 REPOSITORY='https://github.com/chenxinan9/boss-job-apply'
 RELEASE_AVAILABLE=False  # Re-enable only after independent live acceptance.
-ARCHIVES={'codex': {'name': 'boss-apply-codex-0.4.0-rc.10.zip', 'sha256': '1b780ee3f48d90ef09d882fffebc27a4f8d7ee29c3f7251ab156bdc03d21fd2a'}, 'workbuddy-macos': {'name': 'boss-apply-workbuddy-macos-0.4.0-rc.10.zip', 'sha256': '648a9258c82fbf1c2b6876088708e1971fce5d3bba93ebb10c04f60bbaf50537'}, 'workbuddy-windows': {'name': 'boss-apply-workbuddy-windows-0.4.0-rc.10.zip', 'sha256': '31fb726fb4cb415a3d21d1ca8d7b9850577e7e541bd17f829108ccfda9ad55c3'}}
+ARCHIVES={'codex': {'name': 'boss-apply-codex-0.4.0-rc.11.zip', 'sha256': 'b18cdfb788fa016787d342645549ac84accc746ce75d27e89205dc58eb934f00'}, 'workbuddy-macos': {'name': 'boss-apply-workbuddy-macos-0.4.0-rc.11.zip', 'sha256': '648a9258c82fbf1c2b6876088708e1971fce5d3bba93ebb10c04f60bbaf50537'}, 'workbuddy-windows': {'name': 'boss-apply-workbuddy-windows-0.4.0-rc.11.zip', 'sha256': '31fb726fb4cb415a3d21d1ca8d7b9850577e7e541bd17f829108ccfda9ad55c3'}}
 MAX_DOWNLOAD=10*1024*1024
 MAX_UNPACKED=30*1024*1024
 
@@ -31,8 +32,21 @@ def download(client,target):
     url=REPOSITORY+'/releases/download/'+VERSION+'/'+item['name']
     opener=urllib.request.build_opener(HTTPSRedirect())
     request=urllib.request.Request(url,headers={'User-Agent':'boss-skill-download/1'})
+    try: response=opener.open(request,timeout=45)
+    except urllib.error.URLError:
+        # Some networks cannot reach release URLs; keep the version, asset and hash pinned.
+        api='https://api.github.com/repos/chenxinan9/boss-job-apply/releases/'
+        with opener.open(urllib.request.Request(api+'tags/'+VERSION,headers={'User-Agent':'boss-skill-download/1'}),timeout=45) as metadata:
+            raw=metadata.read(MAX_DOWNLOAD+1)
+        if len(raw)>MAX_DOWNLOAD:raise ValueError('发行元数据大小超限')
+        release=json.loads(raw)
+        assets=release.get('assets',[]) if isinstance(release,dict) else []
+        matches=[a for a in assets if isinstance(a,dict) and a.get('name')==item['name']]
+        if len(matches)!=1 or type(matches[0].get('id')) is not int or matches[0]['id']<=0:raise ValueError('固定版本缺少唯一同名附件')
+        url=api+'assets/'+str(matches[0]['id'])
+        response=opener.open(urllib.request.Request(url,headers={'User-Agent':'boss-skill-download/1','Accept':'application/octet-stream'}),timeout=45)
     digest=hashlib.sha256();size=0
-    with opener.open(request,timeout=45) as response,Path(target).open('xb') as out:
+    with response,Path(target).open('xb') as out:
         if urllib.parse.urlsplit(response.url).scheme.lower()!='https':raise ValueError('拒绝非HTTPS下载')
         while chunk:=response.read(65536):
             size+=len(chunk)
