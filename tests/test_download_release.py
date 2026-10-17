@@ -70,6 +70,14 @@ class DownloadTest(unittest.TestCase):
         with patch.object(m.sys,'argv',['download_release.py','--client','codex']),patch.object(m,'install') as install,patch.object(m.sys,'stderr',io.StringIO()):
             with self.assertRaises(SystemExit) as stopped:m.main()
         self.assertEqual(stopped.exception.code,1);install.assert_not_called()
+    def test_candidate_download_requires_explicit_opt_in(self):
+        output=io.StringIO()
+        with patch.object(m.sys,'argv',['download_release.py','--candidate','--client','codex']),patch.object(m,'install',return_value={'sha256':'0'*64}) as install,patch.object(m.sys,'stdout',output):
+            m.main()
+        install.assert_called_once()
+        self.assertIn('未验收候选',output.getvalue())
+        self.assertFalse(m.RELEASE_AVAILABLE)
+
     def test_real_packaged_files_checksum_and_extract(self):
         for client,item in m.ARCHIVES.items():
             p=Path(__file__).resolve().parents[1]/'dist'/item['name']

@@ -13,10 +13,10 @@ import urllib.parse
 import urllib.request
 import zipfile
 
-VERSION='v0.4.0-rc.9'
+VERSION='v0.4.0-rc.10'
 REPOSITORY='https://github.com/chenxinan9/boss-job-apply'
 RELEASE_AVAILABLE=False  # Re-enable only after independent live acceptance.
-ARCHIVES={'codex': {'name': 'boss-apply-codex-0.4.0-rc.9.zip', 'sha256': '50d71dc2abcc68193daeb5d1d1272a20a3067c68aab2c6bff18ad637813dec8e'}, 'workbuddy-macos': {'name': 'boss-apply-workbuddy-macos-0.4.0-rc.9.zip', 'sha256': 'a0af7fcffb9df2f65d63b371526875b17a57381c89c93198e3f6807ec7a9b73c'}, 'workbuddy-windows': {'name': 'boss-apply-workbuddy-windows-0.4.0-rc.9.zip', 'sha256': '7c1d38547c41446e2b3c999c3e98a733d7ab76d4d2ff2f7ab486dfc5e2da532a'}}
+ARCHIVES={'codex': {'name': 'boss-apply-codex-0.4.0-rc.10.zip', 'sha256': '1b780ee3f48d90ef09d882fffebc27a4f8d7ee29c3f7251ab156bdc03d21fd2a'}, 'workbuddy-macos': {'name': 'boss-apply-workbuddy-macos-0.4.0-rc.10.zip', 'sha256': '648a9258c82fbf1c2b6876088708e1971fce5d3bba93ebb10c04f60bbaf50537'}, 'workbuddy-windows': {'name': 'boss-apply-workbuddy-windows-0.4.0-rc.10.zip', 'sha256': '31fb726fb4cb415a3d21d1ca8d7b9850577e7e541bd17f829108ccfda9ad55c3'}}
 MAX_DOWNLOAD=10*1024*1024
 MAX_UNPACKED=30*1024*1024
 
@@ -94,8 +94,10 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--client',required=True,choices=tuple(ARCHIVES))
     parser.add_argument('--destination',type=Path)
+    parser.add_argument('--candidate',action='store_true',help='明确下载未验收候选，仅供本人授权的独立实站测试')
     args=parser.parse_args();dest=args.destination or Path.cwd()/('boss-apply-'+args.client)
-    if not RELEASE_AVAILABLE: parser.exit(1,'当前没有通过独立实站验收的公开安装包，下载已暂停；请勿使用旧包。\n')
+    if not RELEASE_AVAILABLE and not args.candidate: parser.exit(1,'当前没有通过独立实站验收的公开安装包，下载已暂停；请勿使用旧包。\n')
+    if args.candidate: print('未验收候选：下载不代表投递通过；不覆盖生产或私人资料。')
     try:receipt=install(args.client,dest)
     except (ValueError,OSError,RuntimeError,zipfile.BadZipFile) as e:parser.exit(1,'下载未完成：'+str(e)+'\n')
     print('已校验并下载 '+VERSION+'：'+str(dest.absolute()))

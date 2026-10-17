@@ -24,11 +24,11 @@ jobs:
       - run: python -m unittest discover -s tests -v
       - name: Download published Codex package over HTTPS
         if: github.event_name == 'release'
-        run: python tools/download_release.py --client codex --destination "${{ runner.temp }}/boss-download-codex"
+        run: python tools/download_release.py --candidate --client codex --destination "${{ runner.temp }}/boss-download-codex"
       - name: Download published WorkBuddy macOS package over HTTPS
         if: github.event_name == 'release'
-        run: python tools/download_release.py --client workbuddy-macos --destination "${{ runner.temp }}/boss-download-workbuddy-macos"
+        run: python tools/download_release.py --candidate --client workbuddy-macos --destination "${{ runner.temp }}/boss-download-workbuddy-macos"
 
       - name: Download published WorkBuddy Windows package over HTTPS
         if: github.event_name == 'release'
-        run: python tools/download_release.py --client workbuddy-windows --destination "${{ runner.temp }}/boss-download-workbuddy-windows"
+        run: python tools/download_release.py --candidate --client workbuddy-windows --destination "${{ runner.temp }}/boss-download-workbuddy-windows"
