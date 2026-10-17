@@ -62,8 +62,9 @@ def validate(p):
     if not isinstance(sch['pause_dates'],list): raise ValueError('暂停日期必须为列表')
     for day in sch['pause_dates']:
         if not isinstance(day,str) or date.fromisoformat(day).isoformat()!=day: raise ValueError('暂停日期须为YYYY-MM-DD')
-    for key in ('historical_dedupe','post_send_verification','per_job_records'):
+    for key in ('historical_dedupe','post_send_verification'):
         if p.get(key) is not False: raise ValueError(key+' 与本流程不符')
+    if p.get('per_job_records') is not True: raise ValueError('per_job_records 须为true，仅记录已派发动作，不核验成功或用于去重')
     if p.get('completion')!='CURRENT_PLATFORM_DAILY_CAP': raise ValueError('完成依据须为平台当前满额提示')
     required={'requirements_confirmed':p['requirements_confirmed'], 'search.city':s['city'].strip(),
               **{'search.'+k:s[k] for k in ('recommendation_tabs','salary_bands','keywords')},

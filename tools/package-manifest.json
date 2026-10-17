@@ -17,10 +17,7 @@
     "optional/native-guard/control-signals.json",
     "optional/native-guard/README.md",
     "references/browser-session.md",
-    "scripts/doctor.py",
-    "references/setup.md",
-    "scripts/browser-session.mjs",
-    "references/agent-browser.md"
+    "references/setup.md"
   ],
   "boss-apply-workbuddy-macos": [
     "SKILL.md",

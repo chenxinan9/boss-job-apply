@@ -13,9 +13,9 @@ import urllib.parse
 import urllib.request
 import zipfile
 
-VERSION='v0.4.0-rc.6'
+VERSION='v0.4.0-rc.7'
 REPOSITORY='https://github.com/chenxinan9/boss-job-apply'
-ARCHIVES={'codex': {'name': 'boss-apply-codex-0.4.0-rc.6.zip', 'sha256': '43a13f9bd9efd2e44733e9f9913c070869ce4919a02f47e9114ce181a80ede9a'}, 'workbuddy-macos': {'name': 'boss-apply-workbuddy-macos-0.4.0-rc.6.zip', 'sha256': 'd6bfb28579f9184cdcf695532dc5ea9ebb6316db751504e126cd951bbd2e534c'}, 'workbuddy-windows': {'name': 'boss-apply-workbuddy-windows-0.4.0-rc.6.zip', 'sha256': 'c3ebf1d1e49be37e9a95cc4f586882f83730cf5fbf8f063d7156c756b4edff76'}}
+ARCHIVES={'codex': {'name': 'boss-apply-codex-0.4.0-rc.7.zip', 'sha256': '3dfd7d9cc72c6803145421805a0b161b0f28832e5cae8abb5a5629a74d52b89d'}, 'workbuddy-macos': {'name': 'boss-apply-workbuddy-macos-0.4.0-rc.7.zip', 'sha256': 'fbc6383377da1c0afdcecdd4e0792a6f3e383bd50905ab49eae4918d6f7ec336'}, 'workbuddy-windows': {'name': 'boss-apply-workbuddy-windows-0.4.0-rc.7.zip', 'sha256': 'f42abebaf82c0f6af5af741b2754559bbbc4651276850e7e56ad4018bf5215e6'}}
 MAX_DOWNLOAD=10*1024*1024
 MAX_UNPACKED=30*1024*1024
 

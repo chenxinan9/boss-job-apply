@@ -1,6 +1,9 @@
 import copy
 import importlib.util
 import json
+import os
+import subprocess
+import sys
 import unittest
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
@@ -62,9 +65,16 @@ class PolicyTest(unittest.TestCase):
             with self.assertRaises(ValueError):self.validate(p)
         self.p['schema_version']=1
         with self.assertRaises(ValueError):self.validate(self.p)
-    def test_forbidden_recording_rejected(self):
-        self.p['per_job_records']=True
-        with self.assertRaises(ValueError):self.validate(self.p)
+    def test_dispatch_records_required_without_ledger_or_verification(self):
+        p=self.ready();self.assertTrue(self.validate(p))
+        for field,value in [('per_job_records',False),('per_job_records',1),('historical_dedupe',True),('post_send_verification',True)]:
+            q=copy.deepcopy(p);q[field]=value
+            with self.assertRaises(ValueError):self.validate(q)
+    def test_policy_cli_with_legacy_console_encoding(self):
+        env=dict(os.environ,PYTHONIOENCODING='cp1252')
+        result=subprocess.run([sys.executable,str(self.base/'scripts/check_policy.py'),str(self.base/'templates/policy.example.json')],env=env,capture_output=True,timeout=10)
+        self.assertEqual(result.returncode,0,result.stderr)
+        self.assertEqual(json.loads(result.stdout)['status'],'DRAFT')
     def test_client_specific_skill_metadata(self):
         for client in ('codex','workbuddy-macos','workbuddy-windows'):
             header=(PACKAGES/('boss-apply-'+client)/'SKILL.md').read_text(encoding='utf-8').split('---',2)[1]
