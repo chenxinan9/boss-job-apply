@@ -1,6 +1,6 @@
 # 发布要求
 
-当前v0.4.0-rc.14只作为标有prerelease的独立测试候选。不得标为Latest稳定版或将下载、离线测试、CI、连接与本机参考成绩写成公开包实站通过。默认下载关闭；只有--candidate明确选择固定候选，RELEASE_AVAILABLE仍为false。
+当前v0.4.0-rc.15只作为标有prerelease的独立测试候选。不得标为Latest稳定版或将下载、离线测试、CI、连接与本机参考成绩写成公开包实站通过。默认下载关闭；只有--candidate明确选择固定候选，RELEASE_AVAILABLE仍为false。
 
 发布前按tools/package-manifest.json白名单打包，核对源码、ZIP内容、SHA256SUMS、隐私与测试。只包含通用流程，不含私人简历、条件、账号、Cookie、聊天、截图、日志、路径或任务标识。固定版本发布后须回下载核对；候选也要通过三系统下载和解包检查。
 
